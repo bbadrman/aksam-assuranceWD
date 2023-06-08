@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Information du
+	{{ prospect.name }}
+   {{ prospect.lastname }}- Aksam{% endblock %}
+
+{% block body %}
+  <div class="container">
+	<section class="content-header">
+		<h1>
+			Prospects
+			<small>Fiche</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li>
+				<a href="{{ path('user_index') }}">
+					<i class="fa fa-users"></i>
+					Tous les Prospects</a>
+			</li>
+			<li class="active">	{{ prospect.name }}
+				 {{ prospect.lastname }}</li>
+		</ol>
+	</section>
+
+	<div class="col-md-12 mt">
+
+		<div class="content-panel">
+			<table class="table table-hover">
+				<h3>
+					<i class="fa fa-angle-right"></i>
+					Prospect du 
+					<b>{{ prospect.name }} </b>
+                    {# {% if  app.user and app.user == prospect.comrcl %} #}
+						{# {{ prospect.lastname }}</b> tu as {{" %02d"|format(app.session.get('security'))}} en panier  #}
+                        {# {% endif %} #}
+				</h3>
+
+
+				<p class="centered">
+				 
+
+						<img src=" {{ asset('images/aksamLogo.jpeg') }} " class="img-circle" width="80" alt="">
+					</a>
+
+				</p>
+				<hr>
+
+				<thead>
+					<tr>
+						<div class="btn-group pull-right" style="margin-right: 5px;">
+						{% if is_granted('ROLE_ADMIN') == true %}
+							<button type="button" class="btn btn-danger">Action</button>
+							<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							{% endif %}
+							<ul class="dropdown-menu">
+								<li>
+								
+									<a href="{{ path('app_prospect_edit', {'id': prospect.id}) }}">
+										<i class="fa fa-edit"></i>
+										Modifier
+									</a>
+								</li>
+								<li class="show-delete">
+									{{ include('prospect/_delete_form.html.twig') }}
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a href="{{ path('app_prospect_index') }}">
+										<i class="fa fa-undo"></i>
+										Retour a la liste des prospects
+									</a>
+								</li>
+							</ul>
+						</div>
+					</tr>
+				</thead>
+				<tbody>
+ 
+             
+            <tr>
+                <th>Name</th>
+                <td>{{ prospect.name }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ prospect.lastname }}</td>
+            </tr>
+            <tr>
+                <th>GSM 1</th>
+                <td>{{ prospect.phone }}</td>
+            </tr>
+            <tr>
+                <th>GSM 2</th>
+                <td>{{ prospect.gsm }}</td>
+            </tr>
+            <tr>
+                <th>Email </th>
+                <td>{{ prospect.email }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+              <td> {% if prospect.gender == 1 %}Male{% else %}Female {% endif %} </td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ prospect.city }}</td>
+            </tr>
+            <tr>
+                <th>Adresse </th>
+                <td>{{ prospect.adress }}</td>
+            </tr>
+            <tr>
+                <th>Date de naissance</th>
+                <td>{{ prospect.brithAt ? prospect.brithAt|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ prospect.source }}</td>
+            </tr>
+            <tr>
+                <th>Motive de saisir</th>
+                
+                <td>
+                         {% if prospect.motifSaise == 0 %} Autre {% endif %} 
+						 {% if prospect.motifSaise == 1 %} Parrainage {% endif %}  
+						 {% if prospect.motifSaise == 2 %} Appel Entrant {% endif %} 
+						 {% if prospect.motifSaise == 3 %} Avenant {% endif %} 
+                
+                </td>
+            </tr>
+            <tr>
+                <th>Type Prospect</th>
+                <td>{{ prospect.typeProspect }}</td>
+            </tr>
+            <tr>
+                <th>Raison Sociale</th>
+                <td>{{ prospect.raisonSociale }}</td>
+            </tr>
+            <tr>
+                <th>Code Postal</th>
+                <td>{{ prospect.codePost }}</td>
+            </tr>
+            
+            <tr>
+                <th>Assure</th>
+                <td>{{ prospect.assure }}</td>
+            </tr>
+            <tr>
+                <th>LastAssure</th>
+                <td>{{ prospect.lastAssure }}</td>
+            </tr>
+            <tr>
+                <th>MotifResil</th>
+                <td>   {% if prospect.motifResil == 0 %} Aggravation de risque {% endif %} 
+                       {% if prospect.motifResil == 1 %} Amiable {% endif %}  
+                       {% if prospect.motifResil == 2 %} Échéance {% endif %}  
+                       {% if prospect.motifResil == 3 %} Non-paiement {% endif %}  
+                       {% if prospect.motifResil == 4 %} Sinistre
+					   {% endif %}      </td>
+            </tr>
+            <tr>
+                <th>Créé par </th>
+                <td>{{ prospect.autor }}</td>
+            </tr>
+            <tr>
+                <th>Affecté Au  </th>
+               <td  style="color:blue;"> 
+				 {% if prospect.comrcl is not empty %}
+				 {{ prospect.comrcl  }}
+				 {% else %} <a href="#" style="color:red;"> En Attend </a> {% endif %} </td>
+            </tr>
+            <tr>
+                <th>Date de creation</th>
+                <td>{{ prospect.creatAt |  date('d/m/Y, H:i:s')}}</td>
+            </tr>
+       </tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

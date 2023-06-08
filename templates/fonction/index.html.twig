@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des fonction - G-Stock
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% for label,  messages in app.flashes  %}
+			<div class="container">
+				<div class="alert alert-{{ label }}">
+					{% for message in messages %}
+						{{ message | raw }}
+					{% endfor %}
+
+				</div>
+			</div>
+		{% endfor %}
+		<section class="content-header">
+			<h1>
+				Fonctions
+				<small>Gestion</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li>
+					<a href="{{ path('dashboard') }}">
+						<i class="fa fa-dashboard"></i>
+						Tableau de bord</a>
+				</li>
+				<li class="active">
+					<a href="{{ path('fonction_index') }}">
+						<i class="fa fa-object-fonction"></i>
+						Tous les fonctions</a>
+				</li>
+			</ol>
+			<br>
+			{# <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#AddGroupeModal">Ajouter une fonction</a> #}
+			<a href="{{ path('fonction_new') }}" class="btn btn-primary">Ajouter une fonction</a>
+		</section>
+
+		<div class="row mt">
+			<div class="col-lg-12">
+				<div class="content-panel">
+					<table class="table table-striped table-advance table-hover">
+						<div class="row">
+							<div class="col-xs-8">
+								<h4>
+									<i class="fa fa-list-ul"></i>
+									Index des fonctions
+								</h4>
+							</div>
+							<div class="col-xs-4" style="float: right !important;  margin-right: 5px;">
+								<div class="input-group">
+									{% include 'fonction/_search_form.html.twig' with {search_form: search_form} only %}
+								</div>
+							</div>
+						</div>
+						<hr>
+						<thead>
+							<tr>
+								<th>
+									<i class="fa fa-hashtag"></i>
+									Identifiant</th>
+								<th>
+									<i class="fa fa-address-book"></i>
+									Nom du fonction</th>
+								<th>
+									<i class="fa fa-address-book"></i>
+									Username</th>
+								<th>
+									<i class="fa fa-amazon"></i>
+									Description du fonction</th>
+								<th>
+									<i class="fa fa-cogs"></i>
+									Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for fonction in fonctions %}
+								<tr>
+									<td>{{ fonction.id }}</td>
+									<td>{{ fonction.name }}</td>
+									<td> {% for user in fonction.users %}
+											{{  user  }} <br>
+										{% endfor %}</td>
+									<td>{{ fonction.description }}</td>
+									<td class="btn-toolbar">
+										<a href="{{ path('fonction_show', {'id': fonction.id}) }}" class="btn btn-success btn-xs">
+											<i class="fa fa-eye"></i>
+										</a>
+										<a href="{{ path('fonction_edit', {'id': fonction.id}) }}" class="btn btn-primary btn-xs">
+											<i class="fa fa-pencil"></i>
+										</a>
+										{% set form_title = '<i class="fa fa-trash-o"></i>' %}
+										{{ include('fonction/_delete_form.html.twig', {
+                                    'form_title': form_title}) }}
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="3">Aucun fonction trouvé</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="4" style="text-align:right;">
+									{{ knp_pagination_render(fonctions, 'pagination.html.twig') }}
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

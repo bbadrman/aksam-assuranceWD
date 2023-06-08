@@ -1,0 +1,134 @@
+<div class="sidebar-toggle-box">
+    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+</div>
+<!-- LOGO -->
+<a href="\" class="logo"><b>Ak<span>sam</span></b></a>
+<!-- END LOGO -->
+<div class="nav notify-row" id="top_menu">
+    <!-- NOTIFICATION START -->
+    <ul class="nav top-menu">
+
+        <!-- SETTINGS -->
+        {# <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-tasks"></i>
+                <span class="badge bg-theme">4</span>
+            </a>
+            <ul class="dropdown-menu extended tasks-bar">
+                <div class="notify-arrow notify-arrow-green"></div>
+                <li>
+                    <p class="green">Vous avez 4 tÃ¢ches en attente</p>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="task-info">
+                            <div class="desc">Panneau d'administration</div>
+                            <div class="percent">40%</div>
+                        </div>
+                        <div class="progress progress-striped">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                <span class="sr-only">40% terminÃ© (succÃ¨s)</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="task-info">
+                            <div class="desc">Mise Ã  jour de la base de donnÃ©es</div>
+                            <div class="percent">60%</div>
+                        </div>
+                        <div class="progress progress-striped">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                <span class="sr-only">60% terminÃ© (avertissement)</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="task-info">
+                            <div class="desc">DÃ©veloppement de produits</div>
+                            <div class="percent">80%</div>
+                        </div>
+                        <div class="progress progress-striped">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="sr-only">80% terminÃ©</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="task-info">
+                            <div class="desc">Paiements envoyÃ©s</div>
+                            <div class="percent">70%</div>
+                        </div>
+                        <div class="progress progress-striped">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                <span class="sr-only">70% terminÃ© (important)</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="external">
+                    <a href="#">Voir toutes les tÃ¢ches</a>
+                </li>
+            </ul>
+        </li> #}
+        <!-- END SETTINGS -->
+
+        
+
+        <!-- NOTIFICATION DROPDOWN -->
+        <li id="header_notification_bar" class="dropdown">
+          {% if app.user is not null %} 
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            
+                <i class="fa fa-shopping-cart"></i>
+               
+                <span class="badge bg-warning">{{app.session.get('security')}}  </span>
+                
+            </a>
+            <ul class="dropdown-menu extended notification">
+                <div class="notify-arrow notify-arrow-yellow"></div>
+               
+                <li>
+                    <p class="yellow">Vous avez {{app.user.prospects|length}}  nouvelles prospects</p>
+                </li>
+              
+                <li>
+                    <a href="#">
+                        <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                        nouvelles prospects.
+                    
+                        <span class="small italic"> {{panier.qty|length}}.</span>
+                         
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{path('app_prospect_index')}}"><i class="fa fa-diamond "></i> Vous avez nouvelles prospects</a>
+                </li>
+            </ul>
+               {% endif %}
+        </li>
+        <!-- END NOTIFICATION DROPDOWN -->
+    </ul>
+    <!-- END NOTIFICATION START -->
+</div>
+<div class="top-menu">
+    <ul class="nav pull-right top-menu">
+    {% if app.user %}
+        <li><a class="logout" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+         
+        {% else %}
+         <li><a class="logout" href="{{ path('app_login') }}">Connectez vous</a></li>
+         <li><a class="logout" href="{{ path('register') }}">Inscription</a></li>
+        {% endif %}
+    </ul>
+</div>

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Equipe{% endblock %}
+
+{% block body %}
+   <div class="container">
+    <section class="content-header">
+        <h1>
+            Equipes
+            <small>Gestion</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ path('app_team_index') }}"><i class="fa fa-users"></i> Tous les equipes</a>
+            </li>
+            <li class="active">{{ team.name }}</li>
+        </ol>
+    </section>
+
+  {% block form %}
+        {% set form_title = 'Modifier ' ~ team.name %}
+
+        <div class="row mt">
+            <div class="col-lg-12">
+            
+                {{ include('team/_form.html.twig', {
+                    'button_label': 'Modifier',
+                    'form_title': form_title
+                }) }}
+            </div>
+        </div>
+    {% endblock %}
+     </div>
+{% endblock %}
+
+ {% block stylesheets %}
+{{ parent() }}
+ 
+{% endblock %}
+
+{% block javascripts %}
+
+	{{ parent() }}
+
+
+	<script src='/js/ad.js'>
+    </script>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js" ></script>
+	
+	<script>
+	$('select').select2();
+	
+	// let $user_fonctions = $('#user_fonctions')
+	// $user_fonctions.click(e => {
+	// 	e.preventDefault()
+	// 	$('#user_fonctions').slideDown();
+	// 	$user_fonctions.slideUp();
+	// })
+	
+    </script>
+
+	
+{% endblock %}

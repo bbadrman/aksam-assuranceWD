@@ -1,0 +1,16 @@
+{{ form_start(search_form) }}
+<div class="col-xs-5" style="padding-right: 2px;padding-left: 2px;">
+    {{ form_row(search_form.q, {attr: {class: 'form-control', 'placeholder': 'Rechercher un Utilisateur...'}}) }}
+</div>
+<div class="col-xs-3" style="padding-right: 2px;padding-left: 2px;">
+    {{ form_row(search_form.gender, {attr: {class: 'form-control'}}) }}
+</div>
+<div class="col-xs-3" style="padding-right: 2px;padding-left: 2px;">
+    {{ form_row(search_form.status, {attr: {class: 'form-control'}}) }}
+</div>
+<div class="input-group-btn col-xs-1" style="padding-right: 2px;padding-left: 2px;">
+    <button class="btn btn-default" type="submit">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+</div>
+{{ form_end(search_form) }}

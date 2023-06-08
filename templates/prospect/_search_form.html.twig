@@ -1,0 +1,78 @@
+{{ form_start(search_form) }}
+<div class="container">
+    <div  id="my-form" class="search">
+		<div class="form-group">
+			<div class="form-group col-sm-6">
+                         
+				<div class="alert alert-light">
+				             <div class="form-group col-sm-6" id="from"> 
+							{{ form_row(search_form.d) }}
+							</div>
+							 
+							<div class="form-group col-sm-6" id="to">  
+							{{ form_row(search_form.dd) }}
+							</div> 
+                    {{ form_row(search_form.q) }}				 
+					{{ form_row(search_form.m) }}
+				    {{ form_row(search_form.g) }}
+                    {{ form_row(search_form.c) }}
+						 			
+				</div>
+			</div>			
+		</div>
+
+        <div   class="form-group">
+            <div class="form-group col-sm-6">
+
+                <div class="alert alert-light">
+                        
+                       {{ form_row(search_form.l) }}
+
+        
+                    {% if is_granted('ROLE_ADMIN')  == true %}
+
+                    
+                        {{ form_row(search_form.team) }}
+
+                    {% else %}
+
+                        {{form_row(search_form.team, { 'attr' : { 'style':'display:none'} }) }}
+
+                    {% endif %}
+                            
+                            {{ form_row(search_form.r) }}
+                                
+
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM')  == true %}
+
+                    
+                           {{ form_row(search_form.s) }}
+                           {{ form_row(search_form.source) }}
+
+
+                    {% else %}
+                                {{form_row(search_form.s, { 'attr' : { 'style':'display:none'} }) }}
+                                {{form_row(search_form.source, { 'attr' : { 'style':'display:none'} }) }}
+
+                    {% endif %}
+                                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+     <div class="form-group col-sm-12">
+                <div class="text-center">
+                        <button class="btn btn-theme" value="back" onclick="history.go(-1)">Annuler</button>                 
+                          <button class="btn btn-primary btn" type="submit">
+                            RECHERCHER ...
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                         </button>
+                       <input class="btn btn-primary" type="reset" value="Reset">
+                </div>
+    </div>
+               
+ 
+</div>
+       
+{{ form_end(search_form) }}

@@ -1,0 +1,55 @@
+version: '3'
+services:
+  web:
+    build: ./
+    ports:
+      - "91:80"
+    depends_on:
+      - db
+    expose:
+      - 9010
+    volumes:
+      - ./:/var/www/html/
+      - ./config/php.ini:/usr/local/etc/php/php.ini
+      - ./config/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./php/ini/memory_limit.ini:/usr/local/etc/php/conf.d/memory_limit.ini
+      # - ./proxy/conf/nginx.conf:/etc/nginx/nginx.conf
+      # - ./proxy/certs:/etc/nginx/cerst
+    networks:
+      - aksamAssurance_network
+
+  db:
+    image: mysql
+    ports:
+      - "3320:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: aksamAssurance_db
+      MYSQL_USER: badrman
+      MYSQL_PASSWORD: 123456789
+    volumes:
+      - "./db:/var/lib/mysql"
+    networks:
+      - aksamAssurance_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8280:80'
+    restart: always
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+    networks:
+      - aksamAssurance_network
+
+networks:
+  aksamAssurance_network:
+    driver: bridge
+
+volumes:
+###> doctrine/doctrine-bundle ###
+  db-data:
+###< doctrine/doctrine-bundle ###

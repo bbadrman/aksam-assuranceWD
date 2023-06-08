@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ fonction.name }} - G-Stock{% endblock %}
+
+{% block body %}
+<div class="container">
+    <section class="content-header">
+        <h1>
+            fonctiones
+            <small>Gestion</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ path('fonction_index') }}"><i class="fa fa-object-fonction"></i> Tous le fonctiones</a>
+            </li>
+            <li class="active">{{ fonction.name }}</li>
+        </ol>
+    </section>
+
+
+    <!-- FORM -->
+    {% block form %}
+        {% set form_title = 'Modifier ' ~ fonction.name %}
+        <div class="row mt">
+            <div class="col-lg-12">
+                {{ include('fonction/_form.html.twig', {
+                    'button_label': 'Modifier',
+                    'form_title': form_title
+                }) }}
+            </div>
+        </div>
+    {% endblock %}
+    <!-- END FORM -->
+</div>
+{% endblock %}

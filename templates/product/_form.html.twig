@@ -1,0 +1,16 @@
+<div class="form-panel">
+	<h4 class="mb">
+		<i class="fa fa-plus-square-o"></i>
+		{{ form_title|default('Ajouter un produit') }}
+	</h4>
+
+	<div class="form-group">
+		{{ form_start(form) }}
+
+		{{ form_widget(form) }}
+
+		<button class="btn btn-info">{{ button_label|default('Save') }}</button>
+
+		{{ form_end(form) }}
+	</div>
+</div>

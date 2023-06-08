@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche Prospect
+{% endblock %}
+
+{% block body %}
+
+	{% for label,  messages in app.flashes  %}
+		<div class="container">
+			<div class="alert alert-{{ label }}">
+				{% for message in messages %}
+					{{ message | raw }}
+				{% endfor %}
+
+			</div>
+		</div>
+	{% endfor %}
+	<section class="content-header">
+		<h2>
+			Prospects
+			<small>Recherche</small>
+		</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="{{ path('dashboard') }}">
+					<i class="fa fa-dashboard"></i>
+					Tableau de bord</a>
+			</li>
+			<li class="active">
+				<a href="{{ path('app_prospect_index') }}">
+					<i class="fa fa-users"></i>
+					Tous les Prospects</a>
+			</li>
+			<!-- NOTIFICATION DROPDOWN -->
+			<li id="header_notification_bar" class="dropdown">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<i class="fa fa-shopping-cart"></i>
+					<span class="badge bg-warning">{{ prospects|length }}
+					</span>
+				</a>
+
+			</li>
+			<!-- END NOTIFICATION DROPDOWN -->
+		</ol>
+		<br>
+		    {# {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM')  == true %}
+		<a href="{{ path('app_prospect_new') }}" class="btn btn-primary">Ajouter Prospect</a>
+          	{% endif %} #}
+	</section>
+	{{ include('prospect/_search_form.html.twig')  }}
+
+ 
+{% endblock %}

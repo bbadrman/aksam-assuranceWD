@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un utilisateur - Aksam{% endblock %}
+
+{% block body %}
+<div class="container">
+	<section class="content-header ">
+		<h1>
+			Utilisateurs
+			<small>Gestion</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li>
+				<a href="{{ path('user_index') }}">
+					<i class="fa fa-users"></i>
+					Tous les utilisateurs</a>
+			</li>
+			<li class="active">Ajouter un utilisateur</li>
+		</ol>
+	</section>
+
+	<!-- FORM -->
+	{% block form %}
+		<div class="row mt ">
+			<div class="col-lg-12">
+				{{ include('user/_form.html.twig') }}
+			</div>
+		</div>
+	{% endblock %}
+</div>
+	<!-- END FORM -->
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
+{% endblock %}
+
+{% block javascripts %}
+
+	{{ parent() }}
+
+
+	<script src='/js/ad.js'>
+    </script>	
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js" ></script>
+	
+	<script>
+	//select par id prisise
+	
+	// $('#user_fonctions').select2();
+	// $('#user_roles').select2();
+
+	// pour select multiple en seul class
+	$('.selectchoice').select2();
+	// let $user_fonctions = $('#user_fonctions')
+	// $user_fonctions.click(e => {
+	// 	e.preventDefault()
+	// 	$('#user_fonctions').slideDown();
+	// 	$user_fonctions.slideUp();
+	// })
+	
+    </script>
+
+	
+{% endblock %}

@@ -1,0 +1,9 @@
+<form method="post" class="form-inline"
+      action="{{ path('app_team_delete', {'id': team.id}) }}"
+      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer {{ team.name }}?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ team.id) }}">
+    <button class="btn btn-danger btn-xs" style="margin-left: 5px;">
+        {{ form_title|default('Supprimer')|raw }}
+    </button>
+</form>
+ 

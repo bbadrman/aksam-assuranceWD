@@ -1,0 +1,10 @@
+{{ form_start(search_form) }}
+
+    {{ form_row(search_form.q, {attr: {class: 'form-control', 'placeholder': 'Rechercher un fonction...'}}) }}
+    
+    <div class="input-group-btn">
+        <button class="btn btn-default" type="submit">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </div>
+{{ form_end(search_form) }}

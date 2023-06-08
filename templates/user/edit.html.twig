@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ user.firstname }} {{ user.lastname }} - Aksam{% endblock %}
+
+{% block body %}
+<div class="container">
+    <section class="content-header">
+        <h1>
+            Utilisateurs
+            <small>Gestion</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ path('user_index') }}"><i class="fa fa-users"></i> Tous les utilisateurs</a>
+            </li>
+            <li class="active">{{ user.firstname }} {{ user.lastname }}</li>
+        </ol>
+    </section>
+
+    <!-- FORM -->
+    {% block form %}
+        {% set form_title = 'Modifier ' ~ user.firstname ~   user.lastname %}
+
+        <div class="row mt">
+            <div class="col-lg-12">
+            
+                {{ include('user/_form.html.twig', {
+                    'button_label': 'Modifier',
+                    'form_title': form_title
+                }) }}
+            </div>
+        </div>
+    {% endblock %}
+     </div>
+    <!-- END FORM -->
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+	{{ parent() }}
+
+
+	<script src='/js/ad.js'>
+
+
+
+	</script>
+{% endblock %}

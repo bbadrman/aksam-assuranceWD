@@ -1,0 +1,262 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Prospects - Aksam
+{% endblock %}
+
+{% block body %}
+	{% for label,  messages in app.flashes  %}
+		<div class="container">
+			<div class="alert alert-{{ label }}">
+				{% for message in messages %}
+					{{ message | raw }}
+				{% endfor %}
+
+			</div>
+		</div>
+	{% endfor %}
+	<section class="content-header">
+		<h2>
+			Prospects
+			<small>Gestion</small>
+		</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="{{ path('dashboard') }}">
+					<i class="fa fa-dashboard"></i>
+					Tableau de bord</a>
+			</li>
+			<li class="active">
+				<a href="{{ path('app_prospect_index') }}">
+					<i class="fa fa-users"></i>
+					Tous les Prospects</a>
+			</li>
+			<!-- NOTIFICATION DROPDOWN -->
+			<li id="header_notification_bar" class="dropdown">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<i class="fa fa-shopping-cart"></i>
+					<span class="badge bg-warning">{{ prospects|length }}
+					</span>
+				</a>
+
+			</li>
+			<!-- END NOTIFICATION DROPDOWN -->
+		</ol>
+		<br>
+		  {# {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM')  == true %}
+		<a href="{{ path('app_prospect_new') }}" class="btn btn-primary">Ajouter Prospect</a>
+          	{% endif %} #}
+	</section>
+
+	<div class="row mt">
+		<div class="col-lg-12">
+			<div class="content-panel">
+			
+				 
+					{% if app.request.get('_route') == 'prospect_search' %}	
+						<div class="col-xs-12" style="float: right !important;">
+							<div class="row" style="margin-right: 5px;">
+								{% include 'prospect/_search_form.html.twig' with {search_form: search_form} only %}
+							</div>
+						</div>
+					 {% endif %}
+					<hr>
+                    <div id="shrch">
+					
+				<table class="table table-striped table-advance table-hover"  >
+					<thead>
+					
+						<tr>
+
+						{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM') == true %}
+							<th>Autor</th>
+							<th>Commerciele</th>
+						{% endif %}
+							<th>Equipe</th>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>Status</th>
+							<th>Gender</th>
+							<th>Ville</th>
+							<th>Source</th>
+							<th>Motif</th>
+							<th>TypeProspect</th>
+							<th>RaisonSociale</th>
+							<th>Assure</th>
+							<th>Ancienne</th>
+							<th>Motife Resil</th>
+							
+						{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM') == true %}
+							 <th>option</th>
+						{% endif %}
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{% for prospect in prospects %}
+							<tr>
+
+									{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM') == true %}
+									<td>
+										{% if prospect.autor  is not empty %}
+
+											<a href="#" class="btn btn-primary  ">
+												{{ prospect.autor }}
+											</a>
+										{% else %}
+											<a href="#" class="btn btn-success  ">
+												Externe
+											</a>
+										{% endif %}
+									</td>
+								{% endif %}
+
+								{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM') == true %}
+									<td>
+
+										{% if prospect.comrcl is not empty %}
+
+											<a href="#" class="btn btn-info ">
+												{{ prospect.comrcl  }}
+											</a>
+										{% else %}
+											<a href="#" class="btn btn-success  ">
+												En attend
+											</a>
+										{% endif %}
+									</td>
+								{% endif %}
+
+								<td>
+
+									{% if prospect.team is not empty %}
+										{{ prospect.team }}
+									{% else %}
+										Aucun
+									{% endif %}
+
+								</td>
+								<td>{{ prospect.name }}</td>
+								<td>{{ prospect.lastname }}</td>
+								<td>{{ prospect.phone }}</td>
+								<td>{{ prospect.email }}</td>
+								<td>
+
+									{% if prospect.comrcl and prospect.team is not empty %}
+									                <button class='btn btn' style="background-color:Violet;">Réaffecté    </button>
+									{% elseif prospect.comrcl is  empty and prospect.team is not empty  %}
+													  <button class='btn btn' style="background-color:Orange;">Affecté </button>
+									{% else %}
+												     <button class='btn btn' style="background-color:SlateBlue;">Nouveau  </button>
+									{% endif %}
+								</td>
+								<td>
+									{% if prospect.gender == 1 %}Male{% else %}Female
+									{% endif %}
+								</td>
+
+								<td>{{ prospect.city }}</td>
+								<td>{{ prospect.source }}</td>
+								<td>
+									{% if prospect.motifSaise is null %} Autre {% endif %} 
+									{% if prospect.motifSaise == 1 %} Parrainage {% endif %}  
+									{% if prospect.motifSaise == 2 %} Appel Entrant {% endif %} 
+									{% if prospect.motifSaise == 3 %} Avenant {% endif %} 
+									{% if prospect.motifSaise == 4 %} Ancienne Contrat {% endif %} 
+                
+                                 </td>
+								<td>{{ prospect.typeProspect }}</td>
+								<td>{{ prospect.raisonSociale }}</td>
+								<td>{{ prospect.assure }}</td>
+								<td>{{ prospect.lastAssure }}</td>
+								<td>
+									{% if prospect.motifResil == 0 %}
+										Aggravation de risque
+										{% endif %}
+									{% if prospect.motifResil == 1 %}
+										Amiable
+									{% endif %}
+									{% if prospect.motifResil == 2 %}
+										Échéance
+									{% endif %}
+									{% if prospect.motifResil == 3 %}
+										Non-paiement
+									{% endif %}
+									{% if prospect.motifResil == 4 %}
+										Sinistre
+									{% endif %}
+								</td>
+								
+								{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM') == true %}
+									<td>
+										 
+											{{ render(controller('App\\Controller\\ProspectController::edit',{'id':prospect.id}))}}
+											 
+
+									</td>
+										{% else %}
+										{% if not is_granted('ROLE_ADMIN') == true %}
+									<td>
+											<a href="{{ path('app_prospect_edit', {'id': prospect.id}) }}" class="btn btn-primary btn-xs">
+												<i class="fa fa-pencil"></i>
+											</a>
+									</td>
+									 {% endif %}
+
+								{% endif %}
+								<td class="btn-toolbar">
+									<a href="{{ path('app_prospect_show', {'id': prospect.id}) }}" class="btn btn-success btn-xs">
+										<i class="fa fa-eye"></i>
+									</a>
+				 
+
+									{# {% if not is_granted('ROLE_ADMIN') == true %}
+									<a href="{{ path('app_prospect_edit', {'id': prospect.id}) }}" class="btn btn-primary btn-xs">
+										<i class="fa fa-pencil"></i>
+									</a>
+									{% endif %} #}
+								</td>
+							</tr>
+
+					{% endfor %}
+						{# {% if  app.user and app.user == prospect.comrcl %}
+				 	  Tableau
+					  {% endif %} #}
+
+					 
+				</tbody>
+				<tfoot class="text-right">
+					<tr>
+					{% if app.request.get('_route') == 'prospect_search' %}	
+						<td colspan="7" >
+									{{ knp_pagination_render(prospects, 'pagination.html.twig') }}
+						 </td>																																																				
+                    {% endif %}
+					</tr>
+				</tfoot>
+			</table>	
+			</div>
+		</div>
+	</div>
+</div>
+ 
+ 
+ 
+
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+ <script src='/js/ad.js'> 
+{# $(document).ready(function() {
+  $("#reset-button").click(function() {
+    $("#my-form .alert").empty();
+  });
+}); #}
+{# </script> #}
+
+</script>{% endblock %}

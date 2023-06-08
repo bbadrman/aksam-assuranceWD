@@ -1,0 +1,257 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent()}}
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/css/axentix.min.css">
+{% endblock %}
+ 
+{% block title %}Liste des Utilisateurs - Aksam
+{% endblock %}
+
+{% block body %}
+
+	{% for label,  messages in app.flashes  %}
+			<div class="container">
+				<div class="alert alert-{{ label }}">
+					{% for message in messages %}
+						{{ message | raw }}
+					{% endfor %}
+
+				</div>
+			</div>
+		{% endfor %}
+		
+	{% if is_granted('ROLE_ADMIN') == true %}
+		<section class="content-header">
+			<h1>
+				Utilisateurs
+				<small>Gestion</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li>
+					<a href="{{ path('dashboard') }}">
+						<i class="fa fa-dashboard"></i>
+						Tableau de bord</a>
+				</li>
+				<li class="active">
+					<a href="{{ path('user_index') }}">
+						<i class="fa fa-users"></i>
+						Tous les utilisateurs</a>
+				</li>
+			</ol>
+			<br>
+			<a href="{{ path('user_new') }}" class="btn btn-primary">Ajouter un utilisateur</a>
+		</section>
+
+		<div class="row mt">
+			<div class="col-lg-12">
+				<div class="content-panel">
+					<table class="table table-striped table-advance table-hover">
+						<div class="row">
+							<div class="col-xs-5">
+								<h4>
+									<i class="fa fa-list-ul"></i>
+									tous les utilisateurs
+								</h4>
+							</div>
+							<div class="col-xs-5" style="float: right !important;">
+								<div class="row" style="margin-right: 5px;">
+									{% include 'user/_search_form.html.twig' with {search_form: search_form} only %}
+								</div>
+							</div>
+						</div>
+						<hr>
+						<thead>
+							<tr>
+								 
+
+								<th>
+									<i class="fa fa-address-book"></i>
+									Prénom & Nom
+								</th>
+								<th>
+									<i class="fa fa-at"></i>
+									username
+								</th>
+								<th>
+									<i class="fa fa-usd"></i>
+									Remuniration
+								</th>
+								<th>
+									<i class="fa fa-calendar"></i>
+									Date d'Embuache
+								</th>
+								<th>
+                            <i class="fa fa-transgender"></i>
+									Gender  </th>
+								 
+								<th>
+                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+									Status</th>
+
+								<th>
+								<i class="fa fa-users" aria-hidden="true"></i>
+									Equipe
+								</th>
+								<th>
+								<i class="fa fa-product-hunt" aria-hidden="true"></i>
+									Produits
+								</th>
+								<th>
+								<i class="fa fa-tasks" aria-hidden="true"></i>
+									Fonction
+								</th>
+								<th>
+									<i class="fa fa-cogs"></i>
+									Actions
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+ 
+							{% for user in users %}
+							 {# {% set Oui = '<span class="label label-success">Active</span>' %}
+                             {% set Non  = '<span class="label label-warning">Desactive</span>' %}
+								<tr> #}
+									 
+
+									<td>{{ user.firstname |humanize }}
+										{{ user.lastname |humanize }}</td>
+									<td>{{ user.username  }}</td>
+									<td>{{ user.remuneration   | number_format(2 , ',', '') }}</td>
+									<td>{{ user.embuchAt |  date('d/m/Y')}}</td>
+
+
+									<td>
+										{% if user.gender == 1 %}Male{% else %}Female
+										{% endif %}
+									</td>
+
+ 
+ 
+ 
+									<td>
+                                   
+								    {# {% if user.status %}
+										<a href="{{ path('activer', {'id': user.id})}}"  ><button class="btn btn-danger" onclick="disableUser({{ user.id }})">Disable</button></a>
+									{% else %}
+										<a href="{{ path('activer', {'id': user.id})}}"  ><button class="btn btn-success" onclick="enableUser({{ user.id }})">Enable</button></a>
+									{% endif %} #}
+									 	
+								
+
+									   <label class="form-switch mt-2">
+									  
+									   <input type="checkbox" {{(user.status) ? 'checked' : ''}} data-id="{{user.id}}" id="dynamic-button" >
+									    
+											<span class="slider"></span>
+											  
+										</label>
+                                   
+									</td>
+									 
+									<td>
+
+									 {% if user.teams is not empty %}
+													{{ user.teams }}
+													{% else %}
+												       Aucun
+											        {% endif %}
+												 
+									</td>
+
+									<td>
+                                        {# {% for product in user.teams.products %}
+											{{  product  }} <br>
+										{% endfor %} #}
+
+
+									 {% for product in user.products %}
+											{{  product  }} <br>
+										{% endfor %}
+									</td>
+									
+
+									<td>
+										<span class="btn btn-primary rounded">
+											{% if user.fonctions is not empty %}
+												{% for fonction in user.fonctions %}
+													{{ fonction }}<br>
+												{% endfor %}
+											{% else %}
+												Aucun
+											{% endif %}
+
+
+										</span>
+
+
+									</td>
+
+									<td class="btn-toolbar">
+										<a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-success btn-xs">
+											<i class="fa fa-eye"></i>
+										</a>
+										{% if is_granted('ROLE_ADMIN') == true %}
+											<a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary btn-xs">
+												<i class="fa fa-pencil"></i>
+											</a>
+											{% if is_granted('ROLE_SUPER_ADMIN') == true %}
+
+											{# <a hreff="#" class="btn primary press modal-tigger" data-target="DeleteStoreModal" data-id="{{user.id}}"  data-title="{{user.firstname}}">open</a>
+												 #}
+												{% set form_title = '<i class="fa fa-trash-o"></i>' %}
+												{{ include('user/_delete_form.html.twig', {
+                                                    'form_title': form_title
+                                                                           }) }} 
+											{% endif %}
+										{% endif %}
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="8">Aucun utilisateur trouvé</td>
+								</tr>
+							{% endfor %}
+
+						</tbody>
+						<tfoot class="text-right" >
+							<tr>
+								<td colspan="7" >
+									{{ knp_pagination_render(users, 'pagination.html.twig') }}
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+					
+				{% else %}
+
+					{# {% include 'bundles/TwigBundle/Exception/error403.html.twig' %} #}
+					<div class="container">
+						<h1>Alors ? Vous essayer de bousiller le site ?!</h1>
+						<div class="alert alert-danger">
+							<p>Vous n'avez pas le droit d'accéder a cette ressource !</p>
+						</div>
+						<a href="{{ path('dashboard')}}" class="btn btn-primary">Retour a l'accueil</a>
+						{# <a href="{{ path('ads_index')}}" class="btn btn-success">Nos annonces</a> #}
+					</div>
+
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src='/js/ad.js'>
+
+
+</script>
+
+{% endblock %}
+

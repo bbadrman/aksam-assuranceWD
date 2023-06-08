@@ -1,0 +1,103 @@
+ <div class="form-panel">
+	<h4 class="mb">
+		<i class="fa fa-plus-square-o"></i>
+		{{ form_title|default('  Ajouter une prospect') }}
+	</h4>
+
+	<div class="col-sm-2 col-sm-2 control-label"></div>
+	<div class="col-sm-8">
+		{% if not form.vars.valid %}
+			<ul class="alert-danger">
+				{% for child in form.children %}
+					{% if child.vars.errors is defined %}
+						{% for error in child.vars.errors %}
+							<li>{{ error.message }}</li>
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+
+	{{ form_start(form) }}
+	{# {{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }} #}
+
+	<div class="row">
+		<div class="form-group">
+			<div class="form-group col-sm-6">
+
+				<div  class="alert alert-light">
+				   {{ form_row(form.name) }}
+					{# {{ form_row(form.name, {'attr': {'disabled': true}}) }} #}
+					{{ form_row(form.lastname) }}
+                    {{ form_row(form.gender) }}
+                    {{ form_row(form.brithAt) }}
+                    {{ form_row(form.phone) }}
+                    {{ form_row(form.gsm) }}
+					 {{ form_row(form.email) }}
+					{{ form_row(form.city) }}
+                    {# {{ form_row(form.city, {'attr': {'disabled': true}}) }} #}
+                    {{ form_row(form.adress) }} 
+                    {{ form_row(form.codePost) }}                     
+				</div>
+
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-group col-sm-6">
+				<div class="alert alert-light">
+
+					 {{ form_row(form.source) }}
+					  <div id="subMotiv-container" style="display: none" >
+                           {{ form_row(form.motifSaise) }}
+					 </div>
+                     {{ form_row(form.typeProspect) }}
+					  
+                    <div id="subcategory-container" style="display: none" >
+                    {{ form_row(form.raisonSociale) }} 
+					 {# {{ form_widget(form.raisonSociale, {'attr': {'class': 'hidden tourName' }}) }} #}
+                    </div>
+
+                    {{ form_row(form.assure) }}
+                    {{ form_row(form.lastAssure) }}
+					<div id="subResil-container" style="display: none" >
+                    {{ form_row(form.motifResil) }}
+					</div>
+
+					 {# {{ form_row(form.team) }} 
+					 {{ form_row(form.comrcl) }}  #}
+
+				  {# {{ form_rest(form, {'render_rest': false}) }} #}
+                {% if is_granted ('ROLE_ADMIN') %}
+				    {{ form_row(form.team) }} 
+				  
+					{% else %}
+
+					{{ form_widget(form.team, { 'attr' : { 'style':'display:none'} }) }}
+					 
+				   
+				{% endif %}
+
+				{% if is_granted ('ROLE_ADMIN') or is_granted ('ROLE_TEAM')  %}
+				    
+					{{ form_row(form.comrcl) }}   
+
+					{% else %}
+				 
+					{{ form_widget(form.comrcl, { 'attr' : { 'style':'display:none'} }) }}
+				   
+			    {% endif %} 
+				 
+				</div>
+			</div>
+		</div>
+	</div>
+
+           <div class="text-center">
+				<button class="btn btn-theme" value="back" onclick="history.go(-1)">Annuler</button>
+				
+				<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+			</div>
+{{ form_end(form) }}
+</div>
+{# {{ form_rest(form, {'exclude': ['hiddenField'], 'render_rest': false}) }} #}

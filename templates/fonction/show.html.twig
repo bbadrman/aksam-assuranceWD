@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Information du {{ fonction.name }} - G-Stock
+{% endblock %}
+
+{% block body %}
+ <div class="container">
+    <section class="content-header">
+        <h1>
+            fonctiones
+            <small>Gestion</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ path('fonction_index') }}"><i class="fa fa-object-fonction"></i> Tous le fonctiones</a>
+            </li>
+            <li class="active">{{ fonction.name }}</li>
+        </ol>
+    </section>
+
+    <div class="col-md-12 mt">
+        <div class="content-panel">
+            <table class="table table-hover">
+                <h4><i class="fa fa-angle-right"></i> fonctione <b>{{ fonction.name }}</b></h4>
+                <hr>
+                <thead>
+                <tr>
+                    <div class="btn-fonction pull-right" style="margin-right: 5px;">
+                        <button type="button" class="btn btn-danger">Action</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                          
+                                <a href="{{ path('fonction_edit', {'id': fonction.id}) }}"> 
+                                    <i class="fa fa-edit"></i> Modifier
+                                </a>
+                            </li>
+                            <li class="show-delete">
+
+                                {{ include('fonction/_delete_form.html.twig') }}
+
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="{{ path('fonction_index') }}">
+                                    <i class="fa fa-undo"></i> Retour a la liste des fonctiones
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Identifiant</th>
+                    <td>{{ fonction.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ fonction.name }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ fonction.description }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+{% endblock %}

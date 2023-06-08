@@ -1,0 +1,214 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Information du
+	{{ user.firstname }}
+	{{ user.lastname }}- Aksam
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<section class="content-header">
+		<h1>
+			Utilisateurs
+			<small>Gestion</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li>
+				<a href="{{ path('user_index') }}">
+					<i class="fa fa-users"></i>
+					Tous le utilisateurs</a>
+			</li>
+			<li class="active">{{ user.firstname }}
+				{{ user.lastname }}</li>
+		</ol>
+	</section>
+
+	<div class="col-md-12 mt">
+
+		<div class="content-panel">
+			<table class="table table-hover">
+				<h4>
+					<i class="fa fa-angle-right"></i>
+					L'tilisateur
+					<b>{{ user.firstname }}
+						{{ user.lastname }}</b>
+				</h4>
+
+
+				<p class="centered">
+				 
+
+						<img src=" {{ asset('images/aksamLogo.jpeg') }} " class="img-circle" width="80" alt="">
+					</a>
+
+				</p>
+				<hr>
+
+				<thead>
+					<tr>
+						<div class="btn-group pull-right" style="margin-right: 5px;">
+						{% if is_granted('ROLE_ADMIN') == true %}
+							<button type="button" class="btn btn-danger">Action</button>
+							<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							{% endif %}
+							<ul class="dropdown-menu">
+								<li>
+								
+									<a href="{{ path('user_edit', {'id': user.id}) }}">
+										<i class="fa fa-edit"></i>
+										Modifier
+									</a>
+								</li>
+								<li class="show-delete">
+									{{ include('user/_delete_form.html.twig') }}
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a href="{{ path('user_index') }}">
+										<i class="fa fa-undo"></i>
+										Retour a la liste des utilisateurs
+									</a>
+								</li>
+							</ul>
+						</div>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Identifiant</th>
+						<td>{{ user.id }}</td>
+					</tr>
+					
+					<tr>
+						<th>Username</th>
+						<td>{{ user.username }}</td>
+					</tr>
+					<tr>
+						<th>Prénom</th>
+						<td>{{ user.firstname }}</td>
+					</tr>
+					<tr>
+						<th>Nom</th>
+						<td>{{ user.lastname }}</td>
+					</tr>
+						{% if is_granted('ROLE_ADMIN') == true %}
+					<tr>
+						<th>Remuneration</th>
+					    <td>{{ user.remuneration | number_format(2 , ',', '') }}  Dhs</td>
+					</tr>
+                    
+					<tr>
+						<th>Date d'Embauche</th>
+						<td>{{ user.embuchAt |  date('d/m/Y')}}</td>
+					</tr>
+					 {% endif %}
+
+					 <tr>
+						<th>Status</th>
+						<td>{% if user.status == 1 %}
+									<a href="{{ path('activer', {'id': user.id})}}"  ></a>
+										<span class="label label-success">Active</span>
+									{% else %}
+										<span class="label label-warning">Desactive</span>
+									{% endif %}</td>
+					</tr>
+					<tr>
+						<th>Gender</th>
+						<td>
+							{% if user.gender == 1 %}Male{% else %}Female
+							{% endif %}
+						</td>
+					</tr>
+
+					
+
+					<tr>
+						<th>Fonction</th>
+						<td>
+							{% if user.fonctions is not empty %}
+											{% for fonction in user.fonctions %}
+												{{ fonction }}<br>
+											{% endfor %}
+										{% else %}
+											Aucun
+										{% endif %}
+						</td>
+					</tr>
+
+
+					<tr>
+						 <th>Permissions </th>
+						<td>
+							{% for role in user.roles %}
+
+												{% if role == "ROLE_CHEF" %}
+													Chef d'equipe<br>
+												{% elseif role == "ROLE_SUPER_ADMIN" %}
+													Directeur Generale<br>
+												{% elseif role == "ROLE_ADMIN" %}
+													Tous<br>
+													
+												{% elseif role == "ROLE_STAND" %}
+													Gestion Standard <br>
+												{% elseif role == "ROLE_ADD_STAND" %}
+													Ajouter Standard<br>
+												{% elseif role == "ROLE_EDIT_STAND" %}
+													Edite Standard<br>
+
+												{% elseif role == "ROLE_RH" %}
+													Gestion RH<br>
+												{% elseif role == "ROLE_ADD_RH" %}
+													Ajouter RH<br>
+												{% elseif role == "ROLE_EDIT_RH" %}
+													Edite RH<br>
+
+												{% elseif role == "ROLE_PROD" %}
+													Gestion Produits<br>
+												{% elseif role == "ROLE_ADD_PROD" %}
+													Ajouter Produit<br>
+												{% elseif role == "ROLE_EDIT_PROD" %}
+													Edite Produit<br>
+
+												{% elseif role == "ROLE_CLIENT" %}
+													Gestion Clients<br>
+												{% elseif role == "ROLE_ADD_CLIENT" %}
+													Ajouter Client<br>
+												{% elseif role == "ROLE_EDIT_CLIENT" %}
+													Edite Client<br>
+												 
+												{% elseif role == "ROLE_PROS" %}
+													Gestion Prospects<br> 
+												{% elseif role == "ROLE_ADD_PROS" %}
+													Ajouter Prospect<br> 
+												{% elseif role == "ROLE_EDIT_PROS" %}
+													Edite Prospect<br>
+												{% endif %}
+											{% endfor %}
+						</td>
+						
+					</tr>
+					<tr>
+						<th>Parmis l'équipe  </th>
+						<td> {% if user.teams is not empty %}
+													{{ user.teams }}
+													{% else %}
+												       Aucun
+											        {% endif %}
+						 </td>
+					</tr>
+					<tr>
+						<th>Produits Implanté </th>
+						<td> {% for product in user.products %}
+											{{  product  }} <br>
+										{% endfor %}
+						 </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

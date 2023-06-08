@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Sign up - srtdash</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link
+		rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+		
+    <link rel="shortcut icon" href="{{ asset('images/aksamLogo.jpeg') }}">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+	  <link rel="stylesheet" href="{{ asset('css/style.css') }}" 
+	  <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" 
+    
+        
+    <!-- others css -->
+     
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" 
+		<link rel="stylesheet" href="{{ asset('css/style-responsive.css') }}">   
+</head>
+
+<body>
+ 
+    
+    <!-- login area start -->
+    <div class="login-area">
+        <div class="container">
+            <div class="login-box ptb--100">
+               {{ form_start(register_form, {'attr': {'novalidate': 'novalidate'}}) }}
+								{% if not register_form.vars.valid %}
+									<ul class="alert-danger">
+										{% for child in register_form.children %}
+											{% if child.vars.errors is defined %}
+												{% for error in child.vars.errors %}
+													<li>{{ error.message }}</li>
+												{% endfor %}
+											{% endif %}
+										{% endfor %}
+									</ul>
+								{% endif %}
+								{% if success_message %}
+									<div class="alert alert-success">
+										{{ success_message }}<br>
+										<a href="{{ path('app_login') }}">
+											<span class="fa fa-sign-in"></span>
+											Connexion</a>
+									</div>
+								{% endif %}
+                    <div class="login-form-head">
+                        <h4>Sign up</h4>
+                        <p>Enregistrer un compte</p>
+                       
+						
+                    </div>
+                    
+                        
+                    
+                    <div class="login-form-body">
+
+				              
+
+                        <div class="form-gp">
+                      
+                           {{ form_label(register_form.username) }}</br> <i class="fa fa-user" aria-hidden="true"></i>
+                          {{ form_widget(register_form.username, {'attr': {'class': 'form-control'}}) }}
+                            
+                            <div class="text-danger"></div>
+                        </div>
+
+                        <div class="form-gp">
+                           	{{ form_label(register_form.firstname) }}</br><i class="far  fa-user-plus"></i>
+                           {{ form_widget(register_form.firstname, {'attr': {'class': 'form-control'}}) }}
+                            <i class="ti-email"></i>
+                            <div class="text-danger"></div>
+                        </div>
+
+                        <div class="form-gp">
+                           	{{ form_label(register_form.lastname) }}</br><i class="fal fa-users"></i>
+                           {{ form_widget(register_form.lastname, {'attr': {'class': 'form-control'}}) }}
+                            <i class="ti-email"></i>
+                            <div class="text-danger"></div>
+                        </div>
+
+                        <div class="form-gp">
+                            {{ form_label(register_form.password.first) }}</br><i class="fa fa-unlock" aria-hidden="true"></i>
+                           	{{ form_widget(register_form.password.first, {'attr': {'class': 'form-control'}}) }}
+                            <i class="ti-lock"></i>
+                            <div class="text-danger"></div>
+                        </div>
+
+                        <div class="form-gp">
+                           {{ form_label(register_form.password.second) }}</br><i class="fa fa-unlock" aria-hidden="true"></i>
+                           {{ form_widget(register_form.password.second, {'attr': {'class': 'form-control'}}) }}
+                            <i class="ti-lock"></i>
+                            <div class="text-danger"></div>
+                        </div>
+
+                        <div class="submit-btn-area">
+
+                           
+                            {{ form_row(register_form.submit, {'attr': {'class': 'btn btn-theme'}}) }}
+                            
+                        </div>
+
+						<hr>
+
+                        <div class="form-footer text-center mt-5">
+                         <p class="text-center text-muted">
+									Déjà enregistré ?
+									<a class="btn btn-theme" href="{{ path('app_login') }}">Login</a>
+                          </p>
+                        </div>
+                        
+                    </div>
+                        {{ form_rest(register_form) }}
+						{{ form_end(register_form) }}
+            </div>
+        </div>
+    </div>
+    <!-- login area end -->
+
+     
+</body>
+
+</html>

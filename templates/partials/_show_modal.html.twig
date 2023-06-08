@@ -1,0 +1,71 @@
+        
+                    {% if prospect.comrcl and prospect.team is not empty %}
+                    
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ prospect.id }}">
+                           R-Affecter <i class="fa fa-reply-all" aria-hidden="true"></i>
+                      </button>	 
+                    {% elseif prospect.comrcl is  empty and prospect.team is not empty  %}
+                      	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal{{ prospect.id }}">
+                           Affecter <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                      </button> 
+										{% else %}
+											<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{ prospect.id }}">
+                           Affecter <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                      </button>
+										{% endif %}
+ 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{ prospect.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Prospect du Mr: {{ prospect.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% set url = path('app_prospect_edit', {'id': prospect.id}) %}
+          {{ form_start(form, {'action':url}) }}
+            {% if is_granted ('ROLE_ADMIN') %}
+             <div class="modal-body" >
+                {{form_row(form.team)}}
+             </div>
+
+					{% else %}
+
+					{{ form_widget(form.team, { 'attr' : { 'style':'display:none'} }) }}
+           {% endif %}
+        <div class="modal-body" > 
+          {{form_row(form.comrcl)}}
+        </div>
+       {# <div class="modal-body"> 
+                           {{form_widget(form.name, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.lastname, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.gender, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.brithAt, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.phone, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.gsm, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.email, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.adress, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.source, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.motifSaise, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.typeProspect, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.raisonSociale, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.city, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.codePost, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.motifResil, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.assure, { 'attr' : { 'style':'display:none'} }) }}
+                           {{form_widget(form.lastAssure, { 'attr' : { 'style':'display:none'} }) }}
+
+        </div> #}
+      <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+      <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        {# <button type="submit" class="btn btn-primary w-100" formnovalidate>Update</button> #}
+        {{form_end(form)}}
+      </div>
+    </div>
+  </div>
+</div>
+  
