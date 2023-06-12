@@ -122,7 +122,8 @@ DATABASE_URL="mysql://badr:123456@test_database:3306/test_db?serverVersion=maria
 
 - Created: src/Validator/Telephone.php
 - Created: src/Validator/TelephoneValidator.php
-
+NB:  
+  /inscription/aksam  pour avoire l'inscription
 #### Creation of a login system :
 
 `symfony make:auth LoginFormAuthenticator`

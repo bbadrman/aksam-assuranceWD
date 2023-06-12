@@ -3,7 +3,7 @@ services:
   web:
     build: ./
     ports:
-      - "91:80"
+      - "92:80"
     depends_on:
       - db
     expose:
@@ -16,37 +16,37 @@ services:
       # - ./proxy/conf/nginx.conf:/etc/nginx/nginx.conf
       # - ./proxy/certs:/etc/nginx/cerst
     networks:
-      - aksamAssurance_network
+      - aksamAssuranceV1_network
 
   db:
     image: mysql
     ports:
-      - "3320:3306"
+      - "3321:3306"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: aksamAssurance_db
+      MYSQL_DATABASE: aksamAssuranceV1_db
       MYSQL_USER: badrman
       MYSQL_PASSWORD: 123456789
     volumes:
       - "./db:/var/lib/mysql"
     networks:
-      - aksamAssurance_network
+      - aksamAssuranceV1_network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - '8280:80'
+      - '8281:80'
     restart: always
     environment:
       PMA_HOST: db
     depends_on:
       - db
     networks:
-      - aksamAssurance_network
+      - aksamAssuranceV1_network
 
 networks:
-  aksamAssurance_network:
+  aksamAssuranceV1_network:
     driver: bridge
 
 volumes:
