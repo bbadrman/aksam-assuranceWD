@@ -490,3 +490,23 @@ le probleme c que on a affecter cet methoud sur controller du dashbord afin d'af
  I create two parametre in form  add (d) and add (add)
  I  modif in repository in the query  
  In the view i f create two div 
+
+ ## Deployment :
+
+ il metre cet script afin maitre ajour la base données sur 'compser.json' :
+                 "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "database-setup": [
+          "php bin/console doctrine:schema:update --force --no-interaction"
+        ],
+        "post-install-cmd": [
+            "@auto-scripts",
+            "@database-setup"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
