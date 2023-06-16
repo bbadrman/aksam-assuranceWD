@@ -206,123 +206,123 @@ public function getProspectRevendeurEquipeA(){
 //Equipe B
 public function getProspectParngEquipeB(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 1 AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 1 AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 }   
 public function getProspectAppEquipeB(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 2 AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 2 AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 }  
 public function getProspectAvnEquipeB(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 3 AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 3 AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 } 
 public function getProspectAutrEquipeB(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 } 
 
 public function getProspectAncienEquipeB(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise  = 4  AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise  = 4  AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 }  
 
 
 public function getProspectSiteEquipeB(){
     
-    return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise  is NULL AND m.source = 'Propre site' AND m.team = 4 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
+    return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise  is NULL AND m.source = 'Propre site' AND m.team = 2 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
     
 }  
 
 public function getProspectRevendeurEquipeB(){
     
-    return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise  is NULL AND m.source = 'Revendeur' AND m.team = 4 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
+    return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise  is NULL AND m.source = 'Revendeur' AND m.team = 2 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
      
 } 
 
 //Equipe C
     public function getProspectParngEquipeC(){
         
-        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 1 AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 1 AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
         
     }   
     public function getProspectAppEquipeC(){
         
-        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 2 AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 2 AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
         
     }  
     public function getProspectAvnEquipeC(){
         
-        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 3 AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 3 AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
         
     } 
     public function getProspectAutrEquipeC(){
         
-        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
         
     }
     public function getProspectAncienEquipeC(){
         
-        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 4  AND m.team = 2 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+        return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 4  AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
         
     }  
 
     public function getProspectSiteEquipeC(){
         
-        return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL   AND m.source = 'Propre site'  AND m.team = 2 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
+        return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL   AND m.source = 'Propre site'  AND m.team = 3 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
         
     }    
 
     public function getProspectRevendeurEquipeC(){
         
-        return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL  AND m.source = 'Revendeur'  AND m.team = 2 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
+        return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL  AND m.source = 'Revendeur'  AND m.team = 3 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
         
     }   
   
   //Equipe D
   public function getProspectParngEquipe(){
         
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 1 AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 1 AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 }   
 public function getProspectAppEquipe(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 2 AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 2 AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 }  
 public function getProspectAvnEquipe(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 3 AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 3 AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 } 
 
 public function getProspectAncienEquipe(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 4 AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise = 4 AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 } 
 
 public function getProspectAutrEquipe(){
     
-    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL AND m.team = 3 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
+    return $this->manager->createQuery('SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL AND m.team = 4 AND m.comrcl is NOT NULL ')->getSingleScalarResult();
     
 }
 
 
 public function getProspectSiteEquipe(){
     
-    return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL   AND m.source = 'Propre site' AND m.team = 3 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
+    return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL   AND m.source = 'Propre site' AND m.team = 4 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
     
 }  
 
 
 public function getProspectRevendeurEquipe(){
     
-    return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL  AND m.source = 'Revendeur' AND m.team = 3 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
+    return $this->manager->createQuery("SELECT COUNT(m) FROM App\Entity\Prospect m WHERE m.motifSaise is NULL  AND m.source = 'Revendeur' AND m.team = 4 AND m.comrcl is NOT NULL ")->getSingleScalarResult();
     
 }  
 
