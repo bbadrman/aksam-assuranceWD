@@ -259,7 +259,7 @@
 					
 							<tr>
 								 
-								<th> % </th>
+								<th>Type </th>
 								<th>Nombre</th>
  
 							</tr>
@@ -290,15 +290,15 @@
 										 
 										<tr  >
 												<th>&#8239; &#8239; &#8239; &#8239; &#8239;   - Propre Site :</th>
-												<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:GreenYellow;">	   {{ " %02d"|format(app.user.prospects|filter(p => p.source == 'Propre site' and p.team is null  and p.comrcl is null)|length) }}</span> </a></td>  
+												<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:GreenYellow;"> {{ " %02d"|format(app.user.prospects|filter(p => p.source == 'Propre site' and p.team is null  and p.comrcl is null)|length) }}</span> </a></td>  
 										</tr>
 										<tr  >
 												<th> &#8239; &#8239; &#8239; &#8239; &#8239;  - Revendeur :</th>
-												<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:Aquamarine;">    {{ " %02d"|format(app.user.prospects|filter(p => p.source == 'Revendeur' and p.team is null  and p.comrcl is null)|length) }}</span> </a></td>  
+												<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:Aquamarine;">  {{ " %02d"|format(app.user.prospects|filter(p => p.source == 'Revendeur' and p.team is null  and p.comrcl is null)|length) }}</span> </a></td>  
 										</tr>
 									 
-									{% endif %}
-                                    {% if is_granted('ROLE_TEAM') == true %}
+								{% endif %}
+                                {% if is_granted('ROLE_TEAM') == true %}
 
 									 <tr>
 										<th>Nouveaux prospects :</th>
@@ -338,7 +338,7 @@
 											<th> &#8239; &#8239; &#8239; &#8239; &#8239;  - Revendeur :</th>
 											<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:Aquamarine;">   {{ " %02d"|format(app.user.teams.prospects|filter(p => p.source == 'Revendeur' and p.comrcl is null)|length) }}</span> </a></td>  
 										</tr>
-									{% endif %}
+								{% endif %}
 							        </tr>		 
 				    </tbody>
 		    </table> 
