@@ -288,14 +288,15 @@
 											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-success"> {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 2  and p.team is null  and p.comrcl is null)|length) }} </span> </a></td>
 										</tr>
 										<tr>
+											<th>Ancienne contrat :</th>                                                                                
+											<td><a href="{{path('app_prospect_index')}}"  > <span  class='btn btn' style="background-color:Violet;">  {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 4  and p.team is null  and p.comrcl is null)|length) }}</span> </a></td>  
+										</tr> 
+										<tr>
 											<th>Avenant :</th>
-											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-warning"> {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 3  and p.team is null  and p.comrcl is null)|length) }} / {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 4 and p.team is null  and p.comrcl is null)|length) }}</span> </a></td> 
+											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-warning"> {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 3  and p.team is null  and p.comrcl is null)|length) }} </span> </a></td> 
 											
 										</tr>
-										<tr>
-											<th>Ancienne contrat :</th>
-											<td><a href="{{path('app_prospect_index')}}"  > <span  class='btn btn' style="background-color:Violet;">  {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 3  and p.team is null  and p.comrcl is null)|length) }}</span> </a></td>  
-										</tr> 
+										
 										 
 										<tr  >
 												<th>&#8239; &#8239; &#8239; &#8239; &#8239;   - Propre Site :</th>
