@@ -289,12 +289,12 @@
 										</tr>
 										<tr>
 											<th>Avenant :</th>
-											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-warning"> {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 3  and p.team is null  and p.comrcl is null)|length) }} </span> </a></td> 
+											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-warning"> {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 3  and p.team is null  and p.comrcl is null)|length) }} / {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 4 and p.team is null  and p.comrcl is null)|length) }}</span> </a></td> 
 											
 										</tr>
 										<tr>
 											<th>Ancienne contrat :</th>
-											<td><a href="{{path('app_prospect_index')}}"  > <span  class='btn btn' style="background-color:Violet;">  {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 4 and p.team is null  and p.comrcl is null)|length) }}</span> </a></td>  
+											<td><a href="{{path('app_prospect_index')}}"  > <span  class='btn btn' style="background-color:Violet;">  {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 3  and p.team is null  and p.comrcl is null)|length) }}</span> </a></td>  
 										</tr> 
 										 
 										<tr  >
@@ -309,17 +309,17 @@
 								{% endif %}
                                 {% if is_granted('ROLE_TEAM') == true %}
 
-									<tr>
-										<th>Nouveaux prospects :</th>
-										<td><a href="{{path('app_prospect_index')}}"  ><span class="btn btn-primary">
-										 {{ " %02d"|format(
-										(app.user.teams.prospects|filter(p => p.motifSaise == 1 and p.comrcl is null)|length) +
-										(app.user.teams.prospects|filter(p => p.motifSaise == 2 and p.comrcl is null)|length) +
-										(app.user.teams.prospects|filter(p => p.motifSaise == 3 and p.comrcl is null)|length) +
-										(app.user.teams.prospects|filter(p => p.motifSaise == 4 and p.comrcl is null)|length) +
-										(app.user.teams.prospects|filter(p => p.motifSaise is null and p.comrcl is null)|length)
-										)}}	 </span></a></td>
-									</tr>
+										<tr>
+											<th>Nouveaux prospects :</th>
+											<td><a href="{{path('app_prospect_index')}}"  ><span class="btn btn-primary">
+											{{ " %02d"|format(
+											(app.user.teams.prospects|filter(p => p.motifSaise == 1 and p.comrcl is null)|length) +
+											(app.user.teams.prospects|filter(p => p.motifSaise == 2 and p.comrcl is null)|length) +
+											(app.user.teams.prospects|filter(p => p.motifSaise == 3 and p.comrcl is null)|length) +
+											(app.user.teams.prospects|filter(p => p.motifSaise == 4 and p.comrcl is null)|length) +
+											(app.user.teams.prospects|filter(p => p.motifSaise is null and p.comrcl is null)|length)
+											)}}	 </span></a></td>
+										</tr>
 
 									 
 										<tr>
