@@ -84,11 +84,15 @@
 							<tr  style="text-align: left;" >
 							{% if is_granted('ROLE_ADMIN') == true %}
 								<th >Equipe</th>
+								<th>Panier</th>
+								<th>Affecte</th>
 							{% else %}
-							 
-								<th>comercl</th>
+							   
+								<th>Comercl</th>
+								 <th>Nombre</th>
 							{% endif %}
-								<th>Nombre</th>
+							    
+								
 								<th>Parrainage</th>
 								<th>Appl </th>
 								<th>Avenant</th>
@@ -104,7 +108,8 @@
 							 	    <tr>
 										<td><span class='btn btn' style="background-color:RoyalBlue ;">  Equipe A</span></td>  
 									 
-									    <td><span class="btn btn-primary"> {{ " %02d"|format(stats.prospectPrngeEqA + stats.prospectAppeEqA + stats.prospectAvneEqA + stats.prospectAncienEqA + stats.prospectAutrEqA) }} </span></td>
+									    <td><span class="btn btn-primary">  {{ " %02d"|format(stats.prospectTotalTeamA) }}  </span></td>
+										 <td><span class="btn btn-primary"> {{ " %02d"|format(stats.prospectPrngeEqA + stats.prospectAppeEqA + stats.prospectAvneEqA + stats.prospectAncienEqA + stats.prospectAutrEqA) }} </span></td>
 										<td> <span class="btn btn-danger ">  {{ " %02d"|format(stats.prospectPrngeEqA) }}   </span> </td>
 										<td><span class="btn btn-success"> {{ " %02d"|format(stats.prospectAppeEqA) }}   </span></td>
 										<td><span class="btn btn-warning">  {{ " %02d"|format(stats.prospectAvneEqA) }}   </span></td>
@@ -115,7 +120,8 @@
 									</tr>	
 							 	    <tr>  
 										<td><span class='btn btn' style="background-color:RoyalBlue ;">Equipe B</span></td>
-									 
+
+									     <td><span class="btn btn-primary">  {{ " %02d"|format(stats.prospectTotalTeamB) }}  </span></td>
 									    <td><span class="btn btn-primary"> {{ " %02d"|format(stats.prospectPrngeEqB + stats.prospectAppeEqB + stats.prospectAvneEqB + stats.prospectAncienEqB + stats.prospectAutrEqB) }} </span></td>
 										<td> <span class="btn btn-danger ">  {{ " %02d"|format(stats.prospectPrngeEqB) }}    </span></td>
 										<td><span class="btn btn-success"> {{ " %02d"|format(stats.prospectAppeEqB) }}    </span></td>
@@ -128,6 +134,7 @@
 									 
 										<td><span class='btn btn' style="background-color:RoyalBlue ;">Equipe C</span></td>
 									 
+									    <td><span class="btn btn-primary">  {{ " %02d"|format(stats.prospectTotalTeamC) }}  </span></td>
 									    <td><span class="btn btn-primary">{{ " %02d"|format(stats.prospectPrngeEqC + stats.prospectAppeEqC + stats.prospectAvneEqC + stats.prospectAncienEqC + stats.prospectAutrEqC) }}  </span></td>
 										<td> <span class="btn btn-danger ">  {{ " %02d"|format(stats.prospectPrngeEqC) }}    </span></td>
 										<td><span class="btn btn-success">  {{ " %02d"|format(stats.prospectAppeEqC) }}    </span></td>
@@ -140,6 +147,7 @@
 									 
 										<td><span class='btn btn' style="background-color:RoyalBlue ;">Equipe D</span></td>
 										 
+									    <td><span class="btn btn-primary">  {{ " %02d"|format(stats.prospectTotalTeamD) }}  </span></td>
 									    <td><span class="btn btn-primary">{{ " %02d"|format(stats.prospectPrngeEq + stats.prospectAppeEq + stats.prospectAvneEq + stats.prospectAncienEq + stats.prospectAutrEq) }} </span></td>
 										<td> <span class="btn btn-danger "> {{ " %02d"|format(stats.prospectPrngeEq) }}     </span></td>
 										<td><span class="btn btn-success"> {{ " %02d"|format(stats.prospectAppeEq) }}      </span></td>
@@ -152,7 +160,7 @@
 									       
 									 <tr class="line">
 										<td><span class='btn btn' style="background-color:SpringGreen ;"><strong> Total :&nbsp &nbsp  </strong> </span></td>
-										 
+										 <td><span class='btn btn' style="background-color:SpringGreen ;"><strong> {{ " %02d"|format(stats.prospectTotalTeamA + stats.prospectTotalTeamB + stats.prospectTotalTeamC + stats.prospectTotalTeamD ) }} </strong> </span></td>
 									    <td><span class='btn btn' style="background-color:SpringGreen ;"><strong> {{ " %02d"|format(stats.prospectPrngeEq + stats.prospectAppeEq + stats.prospectAvneEq + stats.prospectAncienEq + stats.prospectAutrEq + stats.prospectPrngeEqC + stats.prospectAppeEqC + stats.prospectAvneEqC + stats.prospectAncienEqC + stats.prospectAutrEqC + stats.prospectPrngeEqB + stats.prospectAppeEqB + stats.prospectAvneEqB + stats.prospectAncienEqB + stats.prospectAutrEqB +  stats.prospectPrngeEqA + stats.prospectAppeEqA + stats.prospectAvneEqA + stats.prospectAncienEqA + stats.prospectAutrEqA ) }} </strong> </span></td>
 										<td> <span class='btn btn' style="background-color:SpringGreen ;"> <b> {{ " %02d"|format(stats.prospectPrngeEq + stats.prospectPrngeEqC + stats.prospectPrngeEqB + stats.prospectPrngeEqA ) }}  </b>   </span></td>
 										<td><span class='btn btn' style="background-color:SpringGreen ;"> <b> {{ " %02d"|format(stats.prospectAppeEq + stats.prospectAppeEqC + stats.prospectAppeEqB + stats.prospectAppeEqA) }}    </b>  </span></td>
@@ -266,10 +274,10 @@
 					</thead>
 					<tbody>
 					            {% if is_granted('ROLE_ADMIN') == true %}
-						            <tr>
-										<th>Nouveaux prospects :</th>
-										<td><a href="{{path('app_prospect_index')}}"  ><span class="btn btn-primary"> {{" %02d"|format(app.session.get('security'))}} </span></a></td>
-									</tr>
+										<tr>
+											<th>Nouveaux prospects :</th>
+											<td><a href="{{path('app_prospect_index')}}"  ><span class="btn btn-primary"> {{" %02d"|format(app.session.get('security'))}} </span></a></td>
+										</tr>
 									
 										<tr>
 											<th>Parrainage :</th>
@@ -282,6 +290,7 @@
 										<tr>
 											<th>Avenant :</th>
 											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-warning"> {{ " %02d"|format(app.user.prospects|filter(p => p.motifSaise == 3  and p.team is null  and p.comrcl is null)|length) }} </span> </a></td> 
+											
 										</tr>
 										<tr>
 											<th>Ancienne contrat :</th>

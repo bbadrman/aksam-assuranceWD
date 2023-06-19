@@ -49,9 +49,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
             $prospect =  $prospectRepository->findByUserPasAffecter();
             $request->getSession()->set('security', count($prospect) );
             
+            
         } else if (in_array('ROLE_TEAM', $user->getRoles(), true)) {
           
-                // je recupe seulement les prospects affecter au mon equipe
+            // je recupe seulement les prospects affecter au mon equipe
             $prospect =  $prospectRepository->findByUserChefEquipe($user);
             $request->getSession()->set('security', count($prospect) );
             

@@ -38,6 +38,11 @@ class StatsService
         // $prospectParrngChef = $this->getProspectParrngChef($user);
         // $prospectAutreChef = $this->getProspectAutreChef($user); 
 
+        $prospectTotalTeamA = $this->getProspectTeamA($user);
+        $prospectTotalTeamB = $this->getProspectTeamB($user);
+        $prospectTotalTeamC = $this->getProspectTeamC($user);
+        $prospectTotalTeamD = $this->getProspectTeamD($user);
+
         $prospectPrngeEq = $this->getProspectParngEquipe($user);    
         $prospectAppeEq = $this->getProspectAppEquipe($user);     
         $prospectAvneEq = $this->getProspectAvnEquipe($user);    
@@ -76,8 +81,26 @@ class StatsService
 
 
 
-        return compact('prospectRevndEqC', 'prospectSiteEqC', 'prospectRevndEqB', 'prospectSiteEqB', 'prospectRevndEq', 'prospectSiteEq', 'prospectRevndEqA', 'prospectSiteEqA', 'prospectAncienEq', 'prospectAncienEqC', 'prospectAncienEqB', 'prospectAncienEqA', 'prospectTestEqB', 'prospectTetChef', 'prospectAutrEqB', 'prospectAvneEqB', 'prospectAppeEqB', 'prospectPrngeEqB', 'prospectAutrEqA', 'prospectAvneEqA', 'prospectAppeEqA', 'prospectPrngeEqA', 'prospectAutrEqC', 'prospectAvneEqC', 'prospectAppeEqC', 'prospectPrngeEqC', 'prospectAutrEq', 'prospectAvneEq', 'prospectAppeEq', 'prospectPrngeEq', 'users', 'teams', 'products', 'clients', 'prospects');
+        return compact('prospectTotalTeamA', 'prospectTotalTeamB', 'prospectTotalTeamC', 'prospectTotalTeamD', 'prospectRevndEqC', 'prospectSiteEqC', 'prospectRevndEqB', 'prospectSiteEqB', 'prospectRevndEq', 'prospectSiteEq', 'prospectRevndEqA', 'prospectSiteEqA', 'prospectAncienEq', 'prospectAncienEqC', 'prospectAncienEqB', 'prospectAncienEqA', 'prospectTestEqB', 'prospectTetChef', 'prospectAutrEqB', 'prospectAvneEqB', 'prospectAppeEqB', 'prospectPrngeEqB', 'prospectAutrEqA', 'prospectAvneEqA', 'prospectAppeEqA', 'prospectPrngeEqA', 'prospectAutrEqC', 'prospectAvneEqC', 'prospectAppeEqC', 'prospectPrngeEqC', 'prospectAutrEq', 'prospectAvneEq', 'prospectAppeEq', 'prospectPrngeEq', 'users', 'teams', 'products', 'clients', 'prospects');
     }
+
+
+    // count number prospect for each team
+
+
+    public function getProspectTeamA(){
+        return $this->manager->createQuery('SELECT COUNT(p) FROM App\Entity\Prospect p WHERE  p.team  = 1 ')->getSingleScalarResult();
+     }
+
+     public function getProspectTeamB(){
+        return $this->manager->createQuery('SELECT COUNT(p) FROM App\Entity\Prospect p WHERE  p.team  = 2 ')->getSingleScalarResult();
+     }
+     public function getProspectTeamC(){
+        return $this->manager->createQuery('SELECT COUNT(p) FROM App\Entity\Prospect p WHERE  p.team  = 3 ')->getSingleScalarResult();
+     }
+     public function getProspectTeamD(){
+        return $this->manager->createQuery('SELECT COUNT(p) FROM App\Entity\Prospect p WHERE  p.team  = 4 ')->getSingleScalarResult();
+     }
 
     // stat du chartjs
     public function getUsersCount(){
