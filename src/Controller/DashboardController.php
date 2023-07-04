@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Team;
 use App\Entity\User;
 use App\Entity\Prospect;
 use App\Service\StatsService;
@@ -66,10 +67,13 @@ class DashboardController extends AbstractController
         // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $users = $userRepository->findAll();
         $team = $teamRepository->findByTeamConect($user);
+        $teams = $teamRepository->findAll();
+        // dd($teams);
         return $this->render('dashboard/index.html.twig', [
             'stats'    => $stats,
             'users' => $users,
             'teams' => $team, 
+            'team' => $teams,
             'prospects' => $prospect,
             'prospstat' => $prosStat]);
 
@@ -92,6 +96,40 @@ class DashboardController extends AbstractController
          //  $ad = $repo->findOneBySlug($slug);
          return $this->render('dashboard/show.html.twig', [
              'pro' => $pro
+         ]);
+     }
+
+
+
+      /**
+     * Permet d'afficher tous les teams
+     * 
+     *  @Route("/home/list", name="dashboard_list")
+     *
+     * @return Response  
+     */
+
+     public function list(TeamRepository $teamRepository)
+     {
+        $teams = $teamRepository->findAll();
+         return $this->render('dashboard/list.html.twig', [
+            'team' => $teams,
+         ]);
+     }
+
+      /**
+     * Permet d'afficher tous les teams
+     * 
+     *  @Route("/home/show/{id}", name="dashboard_show", methods={"GET"})
+     *
+     * @return Response  
+     */
+
+     public function listShow(Team $team)
+     {
+        
+         return $this->render('partials/_modal_disp_team.html.twig', [
+            'team' => $team,
          ]);
      }
 

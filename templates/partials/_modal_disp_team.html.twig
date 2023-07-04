@@ -1,0 +1,117 @@
+<button type="button" class='btn btn' style="background-color:RoyalBlue ;" data-toggle="modal" data-target="#AddFonctionModal{{ team.id }}">
+                         {{ team.name }}  
+ </button>	
+ 
+
+{# # AddFonctioModal # #}
+<div class="modal fade" id="AddFonctionModal{{ team.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header modal-header-info">
+				<h3 class="modal-title" id="exampleModalLabel">
+					<i class="fa fa-plus-square-o"></i>
+					Statique d'{{ team.name }}
+				</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+    <table class="table">
+         <thead>
+				 <tr>
+									 
+									{# <th>Name</th> #}
+									{# <th>Affecte</th> #}
+									{# <th>En cour</th> #}
+									<th>User</th>
+									<th>Nombre</th>
+									<th>Parrainage </th>
+									<th>Appel </th>
+									<th>Avenant </th>
+									<th>Ancienne</th>    
+									<th>site </th>
+									<th>Revendeur </th>
+				 </tr>
+		 </thead>
+        <tbody>
+            <tr>
+                
+                
+            
+                
+                {# <td>{{ team.name }}</td> #}
+             
+                
+           
+                {# <td>  {{ team.prospects|length }}   </td> #}
+            
+
+             
+                {# <td>  {{ team.prospects|filter(p => p.comrcl is null  )| length  }}    </td> #}
+            
+                <td> 
+						{% for user in team.users %}
+												{{  user  }} <br>
+						{% endfor %}
+				</td>
+             
+                <td>
+					  {% for user in team.users %}
+						 {{  user.prospections | length   }} <br>
+					  {% endfor %}
+		       </td>
+            
+                <td>   
+					{% for user in team.users %}
+						 {{ user.prospections|filter(p => p.motifSaise == 1 )| length }} <br>
+					 {% endfor %}    
+                </td>
+             
+                <td>   
+					 {% for user in team.users %}
+						 {{ user.prospections|filter(p => p.motifSaise == 2 )| length }} <br>
+					 {% endfor %}  
+               </td>
+             
+                <td>   
+					 {% for user in team.users %}
+						 {{ user.prospections|filter(p => p.motifSaise == 3 )| length }} <br>
+					 {% endfor %}  
+              </td>
+             
+                <td>   
+					 {% for user in team.users %}
+						 {{ user.prospections|filter(p => p.motifSaise == 4 )| length }} <br>
+					 {% endfor %}  
+                 </td>
+             
+                <td>   
+					 {% for user in team.users %}
+						 {{ user.prospections|filter(p => p.motifSaise is null and p.source == 'Propre site')| length }} <br>
+					 {% endfor %}   
+                 </td>
+            
+                <td>   
+					 {% for user in team.users %}
+						 {{ user.prospections|filter(p => p.motifSaise is null and p.source == 'Revendeur' )| length }} <br>
+					 {% endfor %}  
+                 </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+                </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+				 
+			</div>
+		</div>
+	</div>
+</div>
+ </div>
+{# # END- AddFonctioModal # #}
+
+	

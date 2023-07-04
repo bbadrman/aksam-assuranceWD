@@ -9,7 +9,7 @@
 
 {% block body %}
 	{% if app.user == true %}
-		<!-- END CUSTOM CHART -->
+		<!-- Stat Affectation du -->
 	 
 		{# <div class="col-lg-6 main-chart">
 			<p class="centered">
@@ -49,7 +49,7 @@
 				   </tbody>
 		    </table> 
 		</div> #}
-         <div class="col-lg-6 main-chart">
+         <div class="col-lg-8 main-chart">
 			<p class="centered">
 
 				<a href="#">
@@ -90,6 +90,7 @@
 							{% if is_granted('ROLE_ADMIN') == true %}
 								<th >Equipe</th>
 								<th>Panier</th>
+								{# <th>Panier Chef</th> #}
 								<th>Affecte</th>
 							{% else %}
 							   
@@ -109,74 +110,58 @@
 							</tr>
 					</thead>
 					<tbody>
-	                          	{% if is_granted('ROLE_ADMIN') == true %}
-							 	    <tr>
-										<td><span class='btn btn' style="background-color:RoyalBlue ;">  Equipe A</span></td>  
-									 
-									    <td><span class="btn btn-primary">  {{ " %02d"|format(stats.prospectTotalTeamA) }}  </span></td>
-										 <td><span class="btn btn-primary"> {{ " %02d"|format(stats.prospectPrngeEqA + stats.prospectAppeEqA + stats.prospectAvneEqA + stats.prospectAncienEqA + stats.prospectAutrEqA) }} </span></td>
-										<td> <span class="btn btn-danger ">  {{ " %02d"|format(stats.prospectPrngeEqA) }}   </span> </td>
-										<td><span class="btn btn-success"> {{ " %02d"|format(stats.prospectAppeEqA) }}   </span></td>
-										<td><span class="btn btn-warning">  {{ " %02d"|format(stats.prospectAvneEqA) }}   </span></td>
-										 <td> <span class='btn btn' style="background-color:Violet;"> {{ " %02d"|format(stats.prospectAncienEqA) }}   </span> </td> 
-									     <td><span class='btn btn' style="background-color:GreenYellow;">  {{ " %02d"|format(stats.prospectSiteEqA) }}   </span></td>     
-									    <td><span class='btn btn' style="background-color:Aquamarine;">  {{ " %02d"|format(stats.prospectRevndEqA) }}   </span> </td>   
-										  
-									</tr>	
-							 	    <tr>  
-										<td><span class='btn btn' style="background-color:RoyalBlue ;">Equipe B</span></td>
+	             {% if is_granted('ROLE_ADMIN') == true %}
+					 {% for teams in team %}
+						 <tr>
+										 
+										
+							 <td>	
+											
+								 {{ render(controller('App\\Controller\\DashboardController::listShow',{'id':teams.id}))}}
+							 </td>
+										         
 
-									     <td><span class="btn btn-primary">  {{ " %02d"|format(stats.prospectTotalTeamB) }}  </span></td>
-									    <td><span class="btn btn-primary"> {{ " %02d"|format(stats.prospectPrngeEqB + stats.prospectAppeEqB + stats.prospectAvneEqB + stats.prospectAncienEqB + stats.prospectAutrEqB) }} </span></td>
-										<td> <span class="btn btn-danger ">  {{ " %02d"|format(stats.prospectPrngeEqB) }}    </span></td>
-										<td><span class="btn btn-success"> {{ " %02d"|format(stats.prospectAppeEqB) }}    </span></td>
-										<td><span class="btn btn-warning"> {{ " %02d"|format(stats.prospectAvneEqB) }}   </span></td>  
-										<td> <span class='btn btn' style="background-color:Violet;"> {{ " %02d"|format(stats.prospectAncienEqB) }}   </span> </td>   
-									      <td><span class='btn btn' style="background-color:GreenYellow;">  {{ " %02d"|format(stats.prospectSiteEqB) }}    </span></td> 
-									    <td><span class='btn btn' style="background-color:Aquamarine;">  {{ " %02d"|format(stats.prospectRevndEqB) }}    </span></td>  
-									</tr>
-									<tr>
-									 
-										<td><span class='btn btn' style="background-color:RoyalBlue ;">Equipe C</span></td>
-									 
-									    <td><span class="btn btn-primary">  {{ " %02d"|format(stats.prospectTotalTeamC) }}  </span></td>
-									    <td><span class="btn btn-primary">{{ " %02d"|format(stats.prospectPrngeEqC + stats.prospectAppeEqC + stats.prospectAvneEqC + stats.prospectAncienEqC + stats.prospectAutrEqC) }}  </span></td>
-										<td> <span class="btn btn-danger ">  {{ " %02d"|format(stats.prospectPrngeEqC) }}    </span></td>
-										<td><span class="btn btn-success">  {{ " %02d"|format(stats.prospectAppeEqC) }}    </span></td>
-										<td><span class="btn btn-warning">  {{ " %02d"|format(stats.prospectAvneEqC) }}      </span></td>
-										<td> <span class='btn btn' style="background-color:Violet;"> {{ " %02d"|format(stats.prospectAncienEqC) }}   </span> </td>   
-									     <td><span class='btn btn' style="background-color:GreenYellow;">   {{ " %02d"|format(stats.prospectSiteEqC) }}     </span></td>  
-									    <td><span class='btn btn' style="background-color:Aquamarine;">  {{ " %02d"|format(stats.prospectRevndEqC) }}     </span></td>  
-									</tr>	
-									<tr>
-									 
-										<td><span class='btn btn' style="background-color:RoyalBlue ;">Equipe D</span></td>
+							<td><span class="btn btn-primary">  {{ " %02d"|format(teams.prospects|length) }}   </span></td>
+
+							 {# <td> <span class="btn btn-danger"> {{ " %02d"|format(teams.prospects|filter(p => p.comrcl is null  )| length)  }}   </span>  </td>
+										  #}
+							 <td><span class="btn btn-primary"> {{ " %02d"|format( teams.prospects|filter(p => p.comrcl is not null  )| length)  }} </span></td>
 										 
-									    <td><span class="btn btn-primary">  {{ " %02d"|format(stats.prospectTotalTeamD) }}  </span></td>
-									    <td><span class="btn btn-primary">{{ " %02d"|format(stats.prospectPrngeEq + stats.prospectAppeEq + stats.prospectAvneEq + stats.prospectAncienEq + stats.prospectAutrEq) }} </span></td>
-										<td> <span class="btn btn-danger "> {{ " %02d"|format(stats.prospectPrngeEq) }}     </span></td>
-										<td><span class="btn btn-success"> {{ " %02d"|format(stats.prospectAppeEq) }}      </span></td>
-										<td><span class="btn btn-warning"> {{ " %02d"|format(stats.prospectAvneEq) }}     </span></td> 
-										<td> <span class='btn btn' style="background-color:Violet;"> {{ " %02d"|format(stats.prospectAncienEq) }}   </span> </td>  
-									     <td><span class='btn btn' style="background-color:GreenYellow;">  {{ " %02d"|format(stats.prospectSiteEq) }}   </span></td>    
-									    <td><span class='btn btn' style="background-color:Aquamarine;">  {{ " %02d"|format(stats.prospectRevndEq) }}   </span></td>   
-									</tr>
+							 <td> <span class="btn btn-danger">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 1  and p.comrcl is not null )| length)  }} </span></td>
 										 
-									       
-									 <tr class="line">
+
+							 <td> <span class="btn btn-success">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise ==  2  and p.comrcl is not null)| length )  }} </span></td>
+
+										 
+							 <td><span class="btn btn-warning">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 3   and p.comrcl is not null )| length)  }} </span></td>
+										 
+							 <td> <span class='btn btn' style="background-color:Violet;"> {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 4   and p.comrcl is not null )| length)  }} </span></td>
+										 
+										 
+							 <td><span class='btn btn' style="background-color:GreenYellow;">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise is null and p.source == 'Propre site' and p.comrcl is not null)| length)  }} </span></td>
+										 
+							  <td><span class='btn btn' style="background-color:Aquamarine;">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise is null and p.source == 'Revendeur' and p.comrcl is not null)| length)  }} </span></td>
+										 
+										
+					 </tr>     	 
+									 
+				    {% endfor %}		 
+
+									<tr class="line">
 										<td><span class='btn btn' style="background-color:SpringGreen ;"><strong> Total :&nbsp &nbsp  </strong> </span></td>
 										 <td><span class='btn btn' style="background-color:SpringGreen ;"><strong> {{ " %02d"|format(stats.prospectTotalTeamA + stats.prospectTotalTeamB + stats.prospectTotalTeamC + stats.prospectTotalTeamD ) }} </strong> </span></td>
-									    <td><span class='btn btn' style="background-color:SpringGreen ;"><strong> {{ " %02d"|format(stats.prospectPrngeEq + stats.prospectAppeEq + stats.prospectAvneEq + stats.prospectAncienEq + stats.prospectAutrEq + stats.prospectPrngeEqC + stats.prospectAppeEqC + stats.prospectAvneEqC + stats.prospectAncienEqC + stats.prospectAutrEqC + stats.prospectPrngeEqB + stats.prospectAppeEqB + stats.prospectAvneEqB + stats.prospectAncienEqB + stats.prospectAutrEqB +  stats.prospectPrngeEqA + stats.prospectAppeEqA + stats.prospectAvneEqA + stats.prospectAncienEqA + stats.prospectAutrEqA ) }} </strong> </span></td>
+									     <td><span class='btn btn' style="background-color:SpringGreen ;"><strong> {{ " %02d"|format(stats.prospectPrngeEq + stats.prospectAppeEq + stats.prospectAvneEq + stats.prospectAncienEq + stats.prospectAutrEq + stats.prospectPrngeEqC + stats.prospectAppeEqC + stats.prospectAvneEqC + stats.prospectAncienEqC + stats.prospectAutrEqC + stats.prospectPrngeEqB + stats.prospectAppeEqB + stats.prospectAvneEqB + stats.prospectAncienEqB + stats.prospectAutrEqB +  stats.prospectPrngeEqA + stats.prospectAppeEqA + stats.prospectAvneEqA + stats.prospectAncienEqA + stats.prospectAutrEqA ) }} </strong> </span></td>
 										<td> <span class='btn btn' style="background-color:SpringGreen ;"> <b> {{ " %02d"|format(stats.prospectPrngeEq + stats.prospectPrngeEqC + stats.prospectPrngeEqB + stats.prospectPrngeEqA ) }}  </b>   </span></td>
 										<td><span class='btn btn' style="background-color:SpringGreen ;"> <b> {{ " %02d"|format(stats.prospectAppeEq + stats.prospectAppeEqC + stats.prospectAppeEqB + stats.prospectAppeEqA) }}    </b>  </span></td>
 										<td><span class='btn btn' style="background-color:SpringGreen ;"> <b> {{ " %02d"|format(stats.prospectAvneEq + stats.prospectAvneEqC + stats.prospectAvneEqB + stats.prospectAvneEqA ) }}   </b>  </span></td> 
 										<td> <span class='btn btn' style="background-color:SpringGreen ;"> <b>{{ " %02d"|format(stats.prospectAncienEq + stats.prospectAncienEqC + stats.prospectAncienEqB + stats.prospectAncienEqA) }} </b>  </span> </td>  
 									     <td><span class='btn btn' style="background-color:SpringGreen ;">  <b>{{ " %02d"|format(stats.prospectSiteEq + stats.prospectSiteEqA + stats.prospectSiteEqB + stats.prospectSiteEqC) }}  </b> </span></td>    
 									    <td><span class='btn btn' style="background-color:SpringGreen ;">  <b>{{ " %02d"|format(stats.prospectRevndEq + stats.prospectRevndEqA + stats.prospectRevndEqB + stats.prospectRevndEqC) }}  </b> </span></td>   
-									</tr>	
-									 	
+									</tr>
+								 
+					 
 									 
-								{% endif %}
+			     {% endif %}
 
 		 
 								{% if is_granted('ROLE_TEAM') == true %}
@@ -184,7 +169,7 @@
 												
 									 {% for team in teams %}
 											{% for user in team.users %}
-											   <tr> 
+											  	 <tr> 
 													 
 													 
 													<td><span class="btn btn-primary">
@@ -233,7 +218,7 @@
 														</span>
 													 </td>
 													
-												</tr>
+												</tr> 
 									
 												 {% endfor %}
 												<tr class="line">
@@ -260,7 +245,9 @@
 				   </tbody>
 		    </table> 
 		</div> 
-		<div class="col-lg-4 main-chart">
+
+			<!-- Prospects en Statique  -->
+	<div class="col-lg-4 main-chart">
 		<p class="centered">
 
 			<a href="{{path('app_prospect_index')}}"> <img src=" {{ asset('images/statiqueProspect.png') }} " class="img-circle" width="140" alt=""> </a>
@@ -357,7 +344,7 @@
 				    </tbody>
 		    </table> 
 		</div>
-      
+
  
 
 		<div class="row">
@@ -417,7 +404,7 @@
 					<div class="bar ">
 						<div class="title">POSPECTS</div>
 						<div class="value tooltips" data-original-title=" {{ " %02d"|format(stats.prospects)   }} " data-toggle="tooltip" data-placement="top">
-							{{ "%02d"|format(stats.prospects)  * 2.7 }}
+							{{ "%02d"|format(stats.prospects)  * 2.7 }}  
 						</div>
 					</div>
 					<div class="bar ">
@@ -555,6 +542,8 @@
 			<!-- /row -->
         </div>
 
+
+
 		{% else %}
 
 			<div class="col-md-12 mt text-center">
@@ -577,8 +566,12 @@
 
 		<!-- /col-md-4-->
 
-
 	{% endblock %}
+
+
+
+
+
 	{% block javascripts %}
 		{{ parent() }}
 		<script type="text/javascript" src="{{ asset('js/jquery.gritter.js') }}"></script>

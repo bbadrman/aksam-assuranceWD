@@ -12,9 +12,21 @@
                 <td>{{ team.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Nom d'equipe</th>
                 <td>{{ team.name }}</td>
             </tr>
+             <tr>
+                <th>Noms des emploiyeurs</th>
+                <td> {% for user in team.users %}
+				 {{  user  }} <br>
+				 {% endfor %}</td>
+            {# </tr>
+               <tr>
+                <th>Noms des emploiyeurs</th>
+                <td> {% for prospect in team.prospects %}
+				 {{  prospect  }} <br>
+				 {% endfor %}</td>
+            </tr> #}
             <tr>
                 <th>Description</th>
                 <td>{{ team.description }}</td>
