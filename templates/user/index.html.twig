@@ -23,6 +23,26 @@
 		{% endfor %}
 		
 	{% if is_granted('ROLE_ADMIN') == true %}
+	<style>
+    #myInput {
+      margin-bottom: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      display: none; /* Cacher la table initialement */
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
 		<section class="content-header">
 			<h1>
 				Utilisateurs
@@ -234,7 +254,7 @@
 							<p>Vous n'avez pas le droit d'accéder a cette ressource !</p>
 						</div>
 						<a href="{{ path('dashboard')}}" class="btn btn-primary">Retour a l'accueil</a>
-						{# <a href="{{ path('ads_index')}}" class="btn btn-success">Nos annonces</a> #}
+						 
 					</div>
 
 				{% endif %}

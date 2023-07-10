@@ -81,7 +81,17 @@ class TeamRepository extends ServiceEntityRepository
          );
      }
  
+     
 
+
+      
+    public function findAllTeamByAscNameQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('c')
+        ->orderBy('c.name', 'ASC');
+         
+    }
+    
      /**
     * @return Team[] Returns an array of Prospect objects 
     */

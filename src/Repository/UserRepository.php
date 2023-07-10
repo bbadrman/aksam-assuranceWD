@@ -118,16 +118,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
            
         );
     }
+    
     public function findComrclByteamOrderedByAscName(Team $team): array
     {
          
         return $this->createQueryBuilder('t')
-            ->andWhere('t.teams = :teams')
+            ->Where('t.teams = :teams')
             ->setParameter('teams', $team)
             // ->orderBy('u.name', 'ASC')
             ->getQuery()
             ->getResult();
+            
     }
+    
     // selectionner les user activer
     public function findActifeCorcl(){
 

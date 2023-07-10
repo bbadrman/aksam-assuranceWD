@@ -8,6 +8,7 @@ use App\Search\SearchProspect;
 use App\Form\SearchProspectType;
 use App\Repository\ProspectRepository;
 use Doctrine\ORM\EntityManagerInterface; 
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,10 +25,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  class ProspectController extends AbstractController
 {
     private $entityManager;
+    private $paginator;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator)
     {
         $this->entityManager = $entityManager;
+        $this->paginator = $paginator;
     }
 
     /**
@@ -37,7 +40,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     {  
         
         
-      
+       
+        $page = $request->query->getInt('page', 1);
+        $perPage = 4;
+
         $form = $this->createForm(SearchProspectType::class);
         $form->handleRequest($request);
 
@@ -46,7 +52,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
         if (in_array('ROLE_SUPER_ADMIN', $user->getRoles(), true)) {
            
             // je recupere les prospects qui son pas encors affecter
-            $prospect =  $prospectRepository->findByUserPasAffecter();
+            $prospect =  $prospectRepository->findByUserPasAffecter($this->paginator, $page, $perPage);
             $request->getSession()->set('security', count($prospect) );
             
             
@@ -57,6 +63,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
             $request->getSession()->set('security', count($prospect) );
             
         }
+      
 
         // Alors si je suis pas admin  je recupere selement les prospect attacher a moi 
         else {
@@ -65,6 +72,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
        
             $request->getSession()->set('security', count($prospect) );
         }
+
+         
 
       
         return $this->render('prospect/index.html.twig', [
@@ -121,8 +130,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
         if ($form->isSubmitted() && $form->isValid()) {
             $prospectRepository->add($prospect, true);
             
-            $this->addFlash('info', 'Votre Prospect a été afficté avec succès!');
+            $this->addFlash('info', 'Votre Prospect a été affecté avec succès!');
             return $this->redirectToRoute('app_prospect_index', [], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->renderForm('partials/_show_modal.html.twig', [
@@ -142,4 +152,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
         return $this->redirectToRoute('app_prospect_index', [], Response::HTTP_SEE_OTHER);
     }
+
+     
 }

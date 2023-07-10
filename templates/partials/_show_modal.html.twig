@@ -13,7 +13,6 @@
                            Affecter <i class="fa fa-paper-plane" aria-hidden="true"></i>
                       </button>
 										{% endif %}
- 
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal{{ prospect.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -37,7 +36,7 @@
 					{{ form_widget(form.team, { 'attr' : { 'style':'display:none'} }) }}
            {% endif %}
         <div class="modal-body" > 
-          {{form_row(form.comrcl)}}
+                {{form_row(form.comrcl)}}
         </div>
        {# <div class="modal-body"> 
                            {{form_widget(form.name, { 'attr' : { 'style':'display:none'} }) }}

@@ -86,17 +86,11 @@ class SearchProspectType extends AbstractType
                 'label' => "Ou :",
                 
                 'widget' => 'single_text',
-                'attr' => [
+                'attr' => [ 
                     'placeholder' => "date format: yyyy-mm-dd."
                 ],
                 'required' => false
             ])
-            // ->add('team', EntityType::class, [
-            //     'class' => Team::class,
-            //     'choice_label' => 'name',
-            //     'required' => false,
-            
-            // ])
 
             ->add('r', Type\TextType::class, [
                 'label' => "Comercielle :",

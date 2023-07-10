@@ -233,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
     teamSelectEl.addEventListener('change', function(e) {
 		console.log('okok');
         const formEl = teamSelectEl.closest('form');
+		console.log("formEl: " + formEl);
 		
         fetch(formEl.action, {
             method: formEl.method,

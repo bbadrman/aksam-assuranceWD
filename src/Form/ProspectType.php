@@ -16,10 +16,14 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type as Type;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProspectType extends AbstractType
@@ -171,78 +175,78 @@ class ProspectType extends AbstractType
                 'choices' => [
                     'Oui' => 'Oui',
                     'Non' => 'Non'
-            ],
-            'expanded' => false,
-            'multiple' => false
-        ])
-        ->add( 'motifResil', Type\ChoiceType::class,
-            [
-                'label' => 'Motif résiliation ',
-                'required' => false,
-                'placeholder' => '--Merci de selectie-- ',
-                'choices' => [
-                    'Aggravation de risque' =>  0,
-                    'Amiable' =>  1,
-                    'Échéance' => 2,
-                    'Non-paiement' => 3,
-                    'Sinistre' =>  4
                 ],
                 'expanded' => false,
                 'multiple' => false
-            ]
-        )
-        
-        // ->add('comrcl')
+            ])
+            ->add(
+                'motifResil',
+                Type\ChoiceType::class,
+                [
+                    'label' => 'Motif résiliation ',
+                    'required' => false,
+                    'placeholder' => '--Merci de selectie-- ',
+                    'choices' => [
+                        'Aggravation de risque' =>  0,
+                        'Amiable' =>  1,
+                        'Échéance' => 2,
+                        'Non-paiement' => 3,
+                        'Sinistre' =>  4
+                    ],
+                    'expanded' => false,
+                    'multiple' => false
+                ]
+            )
+
+            ->add('team', EntityType::class, [
+                'class' => Team::class,
+                'choice_label' => 'name',
+                'required' => false,
+                'placeholder' => '--Choose a Team--',
+                'query_builder' => fn (TeamRepository $teamRepository) =>
+                $teamRepository->findAllTeamByAscNameQueryBuilder()
+            ]);
 
 
-        ->add('team', EntityType::class, [
-            'class' => Team::class,
-            'choice_label' => 'name',
-            'required' => false,
-            'placeholder' => '--Choose a Team--',   
-
-
-        ]);
-       
-          
         $formModifier = function (FormInterface $form, Team $team = null) {
+           
             $comrcl = $team === null ? [] : $this->userRepository->findComrclByteamOrderedByAscName($team);
-        // dd( $comrcl);
+            //dd(team); //null
+            //dd( $comrcl); //[]
             $form->add('comrcl', EntityType::class, [
                 'class' => User::class,
                 'required' => false,
                 'choice_label' => 'username',
                 // 'disabled' => $team === null,
-                'placeholder' => '--Choose a Comercielle--',
+                'placeholder' => '--Choose a Comercial--',
                 'choices' => $comrcl
             ]);
         };
 
 
-        
-
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($formModifier) {
+            function (FormEvent $event) use ($formModifier, $options)  {
                 $data = $event->getData();
-            $formModifier($event->getForm(), $data->getTeam());
-            // if ($options['editing'] === false ) {
+                //dd($data);
+                $formModifier($event->getForm(), $data->getTeam());
+                if ($options['editing'] === false ) {
 
-            //     $formModifier($event->getForm(), $data->getTeam());
-            // }
-        }
-    );
+                    $formModifier($event->getForm(), $data->getTeam());
+                }
+            }
+        );
 
-   
 
-    $builder->get('team')->addEventListener(
-        FormEvents::POST_SUBMIT,
-        function (FormEvent $event) use ($formModifier) {
-            $team = $event->getForm()->getData();
-            $formModifier($event->getForm()->getParent(), $team);
-        }
-    );
- 
+
+        $builder->get('team')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) use ($formModifier) {
+                $team = $event->getForm()->getData();
+                $formModifier($event->getForm()->getParent(), $team);
+            }
+        );
+
         if ($options['editing']) {
             $builder->remove('motifResil')
                 ->remove('assure')
@@ -255,7 +259,7 @@ class ProspectType extends AbstractType
                 ->remove('adress')
                 ->remove('city')
                 ->remove('gender')
-                ->remove('email') 
+                ->remove('email')
                 ->remove('gender')
                 ->remove('phone')
                 ->remove('lastname')
@@ -265,13 +269,13 @@ class ProspectType extends AbstractType
                 ->remove('name');
         }
     }
-    
-//     public function buildView(FormView $view, FormInterface $form, array $options)
-// {
-//     parent::buildView($view, $form, $options);
-    
-//     $view->vars['comrcl'] = $form->get('comrcl')->createView();
-// }
+
+    //     public function buildView(FormView $view, FormInterface $form, array $options)
+    // {
+    //     parent::buildView($view, $form, $options);
+
+    //     $view->vars['comrcl'] = $form->get('comrcl')->createView();
+    // }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

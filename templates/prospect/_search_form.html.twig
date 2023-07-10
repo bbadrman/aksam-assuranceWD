@@ -1,4 +1,6 @@
 {{ form_start(search_form) }}
+
+
 <div class="container">
     <div  id="my-form" class="search">
 		<div class="form-group">
@@ -64,7 +66,7 @@
      <div class="form-group col-sm-12">
                 <div class="text-center">
                         <button class="btn btn-theme" value="back" onclick="history.go(-1)">Annuler</button>                 
-                          <button class="btn btn-primary btn" type="submit">
+                          <button class="btn btn-primary btn search-btn" type="submit">
                             RECHERCHER ...
                                 <i class="fa fa-search" aria-hidden="true"></i>
                          </button>
@@ -76,3 +78,34 @@
 </div>
        
 {{ form_end(search_form) }}
+
+ 
+ 
+ <script > 
+
+document.addEventListener('DOMContentLoaded', function() {
+	var searchBtn = document.querySelector('.search-btn');
+	var formInputs = document.querySelectorAll('#my-form input[type="text"], #my-form select');
+
+	// Fonction pour vérifier si au moins un champ est rempli
+	function checkFormInputs() {
+		for (var i = 0; i < formInputs.length; i++) {
+			if (formInputs[i].value.trim() !== '') {
+				searchBtn.classList.remove('hidden');
+				return;
+			}
+		}
+		searchBtn.classList.add('hidden');
+	}
+
+	// Vérifier les champs à chaque modification
+	for (var i = 0; i < formInputs.length; i++) {
+		formInputs[i].addEventListener('input', checkFormInputs);
+	}
+
+	// Vérifier les champs au chargement de la page
+	checkFormInputs();
+});
+
+</script> 
+ 

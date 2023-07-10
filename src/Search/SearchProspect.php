@@ -59,19 +59,6 @@ class SearchProspect
      * @var string
      */
     public $dd;
-    // public function getD(): ?DateTime
-    // {
-    //     return $this->d;
-    // }
-
-    // public function setD(string $d): self
-    // {
-    //     $this->d = DateTime::createFromFormat('Y-m-d', $d);
-    //     return $this;
-    // }
-
-    
-
      /**
      * @var int
      */

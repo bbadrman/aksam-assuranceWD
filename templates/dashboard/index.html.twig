@@ -86,11 +86,11 @@
 			</colgroup>
 						<thead >
 					
-							<tr  style="text-align: left;" >
+						<tr  style="text-align: left; font-size:20px;" > 
 							{% if is_granted('ROLE_ADMIN') == true %}
 								<th >Equipe</th>
 								<th>Panier</th>
-								{# <th>Panier Chef</th> #}
+								 
 								<th>Affecte</th>
 							{% else %}
 							   
@@ -106,13 +106,14 @@
 								 
 								<th>Site </th>
 								<th>Revendeur </th>
-								 
+								  
 							</tr>
+							
 					</thead>
 					<tbody>
 	             {% if is_granted('ROLE_ADMIN') == true %}
 					 {% for teams in team %}
-						 <tr>
+						 <tr style="text-align:left;">
 										 
 										
 							 <td>	
@@ -121,33 +122,31 @@
 							 </td>
 										         
 
-							<td><span class="btn btn-primary">  {{ " %02d"|format(teams.prospects|length) }}   </span></td>
+							<td><span class="btn btn-primary"> <strong> {{ " %02d"|format(teams.prospects|length) }} </strong>   </span></td>
 
-							 {# <td> <span class="btn btn-danger"> {{ " %02d"|format(teams.prospects|filter(p => p.comrcl is null  )| length)  }}   </span>  </td>
+						    {# <td> <span class="btn btn-danger"> {{ " %02d"|format(teams.prospects|filter(p => p.comrcl is null  )| length)  }}   </span>  </td>
 										  #}
-							 <td><span class="btn btn-primary"> {{ " %02d"|format( teams.prospects|filter(p => p.comrcl is not null  )| length)  }} </span></td>
+							 <td><span class="btn btn-primary"> <strong> {{ " %02d"|format( teams.prospects|filter(p => p.comrcl is not null  )| length)  }}</strong>  </span></td>
 										 
-							 <td> <span class="btn btn-danger">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 1  and p.comrcl is not null )| length)  }} </span></td>
+							 <td > <span class="btn btn-danger"><strong>  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 1  and p.comrcl is not null )| length)  }}</strong>  </span></td>
 										 
-
-							 <td> <span class="btn btn-success">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise ==  2  and p.comrcl is not null)| length )  }} </span></td>
-
+							 <td> <span class="btn btn-success day"> <strong> {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise ==  2  and p.comrcl is not null)| length )  }} </strong> </span></td>
+									 
+							 <td><span class="btn btn" style="background-color:#41B9E1;"> <strong> {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 3   and p.comrcl is not null )| length)  }} </strong> </span></td>
 										 
-							 <td><span class="btn btn-warning">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 3   and p.comrcl is not null )| length)  }} </span></td>
-										 
-							 <td> <span class='btn btn' style="background-color:Violet;"> {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 4   and p.comrcl is not null )| length)  }} </span></td>
+							 <td> <span class='btn btn' style="background-color:Violet;"> <strong>{{ " %02d"|format( teams.prospects|filter(p => p.motifSaise == 4   and p.comrcl is not null )| length)  }} </strong> </span></td>
 										 
 										 
-							 <td><span class='btn btn' style="background-color:GreenYellow;">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise is null and p.source == 'Propre site' and p.comrcl is not null)| length)  }} </span></td>
+							 <td><span class='btn btn' style="background-color:GreenYellow;"> <strong> {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise is null and p.source == 'Propre site' and p.comrcl is not null)| length)  }}</strong> </span></td>
 										 
-							  <td><span class='btn btn' style="background-color:Aquamarine;">  {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise is null and p.source == 'Revendeur' and p.comrcl is not null)| length)  }} </span></td>
+							  <td><span class='btn btn' style="background-color:Aquamarine;"> <strong> {{ " %02d"|format( teams.prospects|filter(p => p.motifSaise is null and p.source == 'Revendeur' and p.comrcl is not null)| length)  }} </strong></span></td>
 										 
 										
 					 </tr>     	 
 									 
 				    {% endfor %}		 
 
-									<tr class="line">
+									<tr style="text-align: left; font-size:20px;">
 										<td><span class='btn btn' style="background-color:SpringGreen ;"><strong> Total :&nbsp &nbsp  </strong> </span></td>
 										 <td><span class='btn btn' style="background-color:SpringGreen ;"><strong> {{ " %02d"|format(stats.prospectTotalTeamA + stats.prospectTotalTeamB + stats.prospectTotalTeamC + stats.prospectTotalTeamD ) }} </strong> </span></td>
 									     <td><span class='btn btn' style="background-color:SpringGreen ;"><strong> {{ " %02d"|format(stats.prospectPrngeEq + stats.prospectAppeEq + stats.prospectAvneEq + stats.prospectAncienEq + stats.prospectAutrEq + stats.prospectPrngeEqC + stats.prospectAppeEqC + stats.prospectAvneEqC + stats.prospectAncienEqC + stats.prospectAutrEqC + stats.prospectPrngeEqB + stats.prospectAppeEqB + stats.prospectAvneEqB + stats.prospectAncienEqB + stats.prospectAutrEqB +  stats.prospectPrngeEqA + stats.prospectAppeEqA + stats.prospectAvneEqA + stats.prospectAncienEqA + stats.prospectAutrEqA ) }} </strong> </span></td>
@@ -169,7 +168,7 @@
 												
 									 {% for team in teams %}
 											{% for user in team.users %}
-											  	 <tr> 
+											  	 <tr style="text-align: left; font-size:20px;"> 
 													 
 													 
 													<td><span class="btn btn-primary">
@@ -221,7 +220,7 @@
 												</tr> 
 									
 												 {% endfor %}
-												<tr class="line">
+												<tr style="text-align: left; font-size:20px;">
 													<td><span class='btn btn' style="background-color:SpringGreen ;"><strong> Total :&nbsp &nbsp  </strong> </span></td>
 													
 													<td><span class='btn btn' style="background-color:SpringGreen ;"><strong> {{  " %02d"|format(app.user.teams.prospects|filter(p => p.comrcl is not null)|length)  }}  </strong> </span></td>
@@ -257,7 +256,7 @@
 		   <table class="table table-striped table-advance table-hover"  >
 					<thead>
 					
-							<tr>
+							<tr style="text-align: left; font-size:20px;">
 								 
 								<th>Type </th>
 								<th>Nombre</th>
@@ -266,36 +265,36 @@
 					</thead>
 					<tbody>
 					            {% if is_granted('ROLE_ADMIN') == true %}
-										<tr>
-											<th>Nouveaux prospects :</th>
-											<td><a href="{{path('app_prospect_index')}}"  ><span class="btn btn-primary"> {{" %02d"|format(app.session.get('security'))}} </span></a></td>
+										<tr style="font-size:20px;" >
+											<th style="text-align: left;">- Nouveaux prospects :</th>
+											<td><a href="{{path('app_prospect_index')}}"  ><span class="btn btn-primary"><strong> {{" %02d"|format(app.session.get('security'))}}</strong> </span></a></td>
 										</tr>
 									
-										<tr>
-											<th>Parrainage :</th>
-											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-danger ">   {{ " %02d"|format(stats.prospectParng) }}   </span></a></td>
+										<tr style="font-size:20px;">
+											<th style="text-align: left;">- Parrainage :</th>
+											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-danger "> <strong>  {{ " %02d"|format(stats.prospectParng) }} </strong>  </span></a></td>
 										</tr>
-										<tr>
-											<th>Appl Entrant :</th>
-											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-success">   {{ " %02d"|format(stats.prospectAppl) }}  </span> </a></td>
+										<tr style=" font-size:20px;">
+											<th style="text-align: left;">- Appl Entrant :</th>
+											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-success"> <strong>  {{ " %02d"|format(stats.prospectAppl) }} </strong> </span> </a></td>
 										</tr>
-										<tr>
-											<th>Avenant :</th>
-											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn-warning">    {{ " %02d"|format(stats.prospectAvn) }}  </span> </a></td> 
+										<tr style=" font-size:20px;">
+											<th style="text-align: left;">- Avenant :</th>
+											<td><a href="{{path('app_prospect_index')}}"  > <span class="btn btn" style="background-color:#41B9E1;">  <strong>  {{ " %02d"|format(stats.prospectAvn) }}  </strong></span> </a></td> 
 											
 										</tr>
-										<tr>
-											<th>Ancienne contrat :</th>                                                                                
-											<td><a href="{{path('app_prospect_index')}}"  > <span  class='btn btn' style="background-color:Violet;">   {{ " %02d"|format(stats.prospectAncien) }}  </span> </a></td>  
+										<tr style=" font-size:20px;">
+											<th style="text-align: left;">- Ancienne contrat :</th>                                                                                
+											<td><a href="{{path('app_prospect_index')}}"  > <span  class='btn btn' style="background-color:Violet;">   <strong>{{ " %02d"|format(stats.prospectAncien) }}</strong>  </span> </a></td>  
 										</tr> 
 										 
-										<tr  >
-												<th>&#8239; &#8239; &#8239; &#8239; &#8239;   - Propre Site :</th>
-												<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:GreenYellow;">    {{ " %02d"|format(stats.prospectSite) }} </span> </a></td>  
+										<tr style=" font-size:20px;" >
+												<th style="text-align: left;">- Propre Site :</th>
+												<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:GreenYellow;">  <strong>  {{ " %02d"|format(stats.prospectSite) }} </strong></span> </a></td>  
 										</tr>
-										<tr  >
-												<th> &#8239; &#8239; &#8239; &#8239; &#8239;  - Revendeur :</th>
-												<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:Aquamarine;">   {{ " %02d"|format(stats.prospectRevnd) }}   </span> </a></td>  
+										<tr style=" font-size:20px;" >
+												<th style="text-align: left;">- Revendeur :</th>
+												<td><a href="{{path('app_prospect_index')}}"  > <span class='btn btn' style="background-color:Aquamarine;"> <strong>  {{ " %02d"|format(stats.prospectRevnd) }} </strong>  </span> </a></td>  
 										</tr>
 									 
 								{% endif %}

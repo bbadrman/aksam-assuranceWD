@@ -176,21 +176,6 @@ class UserController extends AbstractController
 
     }
 
-    /**
-     * @Route("/select", name="select") 
-     */
-    // public function getProductsOfTeam( Request $request  ){
-    
-    //     $product = new Product();
-    //     $product->setName($request->query->get('name'));
-    //     $form = $this->createForm(UserType::class, $product);
-
-    //  if (!$form->has('specification')){
-    //     return new Response(null, 204);
-    //  }
-    //  return $this->render('user/new.html.twig',[
-    //     'forProduct' => $form->createView()
-    //  ]);
-    // }
+   
 
 }

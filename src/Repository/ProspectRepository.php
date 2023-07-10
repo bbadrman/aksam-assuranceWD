@@ -154,27 +154,7 @@ class ProspectRepository extends ServiceEntityRepository
                  ->setParameter('dd', $search->dd->format('Y-m-d H:i:s'));
               
         }
-        // if (isset($search->dd)) {
-        //     $dateString = $search->dd->format('Y-m-d');
-        //     $query = $query
-        //         // ->andWhere('u.creatAt LIKE :dd')
-        //         ->andWhere('u.creatAt < '.$search->dd)
-        //         ->setParameter('dd', "%{$dateString}%");
-              
-        // }
-
-        // if (isset($search->d)) {
-        //     // Get the start and end dates of the search interval
-        //     $startDate = new \DateTime($search->d->format('Y-m-d'));
-        //     $endDate = new \DateTime($search->d->format('Y-m-d'));
-        //     $endDate->add(new \DateInterval('P1D')); // Add one day to include the end date in the search results
         
-        //     // Add a 'where' clause to the query builder that filters by the date interval
-        //     $query = $query
-        //         ->andWhere('u.createdAt BETWEEN :start_date AND :end_date')
-        //         ->setParameter('start_date', $startDate)
-        //         ->setParameter('end_date', $endDate);
-        // }
 
         if (isset($search->s)) {
             $query = $query
@@ -191,8 +171,8 @@ class ProspectRepository extends ServiceEntityRepository
         return $this->paginator->paginate(
             $query,
             $search->page,
-          15
-           
+          
+          50 
         );
     }
       /**
@@ -396,19 +376,23 @@ class ProspectRepository extends ServiceEntityRepository
 
     /**
     * @return Prospect[] Returns an array of Prospect objects
-    * @param SearchProspect $search
     * @return PaginationInterface
     */
     public function findByUserPasAffecter(): array
     {
      // get selement les prospects qui n'as pas encors affectter a un user
-        return $this->createQueryBuilder('p')
+     return  $this->createQueryBuilder('p')
             ->andWhere("p.comrcl is NULL") 
             ->andWhere("p.team is NULL") 
             ->orderBy('p.id', 'ASC') 
             ->getQuery()
             ->getResult()
+            
         ;
+        
+             
+         
+        
     }
 
 
