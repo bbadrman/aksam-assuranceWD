@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Prospect
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<section class="content-header">
+			<h1>
+				Prospects
+				<small>Modifier</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li>
+					<a href="{{ path('app_prospect_index') }}">
+						<i class="fa fa-users"></i>
+						Tous les prospects</a>
+				</li>
+				<li class="active">{{ prospect.name }}
+					{{ prospect.lastname }}</li>
+			</ol>
+		</section>
+		<div class="row mt">
+			<div class="col-lg-12">
+				{% set url = path('app_prospect_edit', {'id': prospect.id}) %}
+				{{ form_start(form, {'action':url}) }}
+				{% if is_granted ('ROLE_ADMIN') %}
+					<div class="modal-body">
+						{{form_row(form.team)}}
+					</div>
+
+				{% else %}
+
+					{{ form_widget(form.team, { 'attr' : { 'style':'display:none'} }) }}
+				{% endif %}
+				<div class="modal-body">
+					{{form_row(form.comrcl)}}
+				</div>
+				<div class="text-center">
+					<button class="btn btn-theme" value="back" onclick="history.go(-1)">Annuler</button>
+
+					<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+
+	{% endblock %}
+
+	{% block javascripts %}
+    <script>
+     
+		document.addEventListener('DOMContentLoaded', function() {
+			const teamSelectEl = document.getElementById('prospect_affect_team');
+			teamSelectEl.addEventListener('change', function(e) {
+				console.log('okok');
+				const formEl = teamSelectEl.closest('form');
+				// console.log("formEl: " + formEl);
+				
+				fetch(formEl.action, {
+					method: formEl.method,
+					body: new FormData(formEl)
+				})
+				.then(response => response.text())
+				.then(html => {
+
+					
+					const parser = new DOMParser();
+					const doc = parser.parseFromString(html, 'text/html');
+					const newComrclFormFieldEl = doc.getElementById('prospect_affect_comrcl');
+				
+						newComrclFormFieldEl.addEventListener('change', function(e) {
+							e.target.classList.remove('is-invalid');
+						});
+						document.getElementById('prospect_affect_comrcl').replaceWith(newComrclFormFieldEl);
+					
+				})
+				.catch(function (err) {
+					console.warn('Something went wrong.', err);
+				});
+			});
+		});
+    </script>
+{% endblock %}
+

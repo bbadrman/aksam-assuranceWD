@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
     teamSelectEl.addEventListener('change', function(e) {
 		console.log('okok');
         const formEl = teamSelectEl.closest('form');
-		console.log("formEl: " + formEl);
+		// console.log("formEl: " + formEl);
 		
         fetch(formEl.action, {
             method: formEl.method,
@@ -247,9 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const doc = parser.parseFromString(html, 'text/html');
             const newComrclFormFieldEl = doc.getElementById('prospect_comrcl');
 		 
-			console.log(newComrclFormFieldEl);
-            
-				console.log('select');
+
                 newComrclFormFieldEl.addEventListener('change', function(e) {
                     e.target.classList.remove('is-invalid');
                 });

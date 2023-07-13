@@ -191,7 +191,9 @@
 								
 								{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_TEAM') %}
 									<td>
-										 
+										 {# <a href="{{ path('app_prospect_edit', {'id': prospect.id}) }}" class="btn btn-primary btn-xs">
+												<i class="fa fa-pencil"></i>
+											</a> #}
 											{{ render(controller('App\\Controller\\ProspectController::edit',{'id':prospect.id}))}}
 											 
 

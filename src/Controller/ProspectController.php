@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Prospect;
 use App\Form\ProspectType;
 use App\Search\SearchProspect;
+use App\Form\ProspectAffectType;
 use App\Form\SearchProspectType;
 use App\Repository\ProspectRepository;
 use Doctrine\ORM\EntityManagerInterface; 
@@ -122,9 +123,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
      */
     public function edit(Request $request, Prospect $prospect, ProspectRepository $prospectRepository): Response
     {
-        $form = $this->createForm(ProspectType::class, $prospect, [
-            'editing' => true,
-        ]);
+        $form = $this->createForm(ProspectAffectType::class, $prospect);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

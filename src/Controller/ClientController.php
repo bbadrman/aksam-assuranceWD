@@ -12,13 +12,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/client") 
+ * @Route("/") 
  */
 class ClientController extends AbstractController
 {
     /**
-     * @Route("/", name="client_index", methods={"GET"})
-     * @IsGranted("ROLE_PROD", message="Tu ne peut pas acces a cet ressource") 
+     * @Route("/client", name="client_index", methods={"GET"})
+     * @IsGranted("ROLE_USER", message="Tu ne peut pas acces a cet ressource")
      */
     public function index(ClientRepository $clientRepository): Response
     {
@@ -28,8 +28,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/nouveau-client", name="client_new", methods={"GET", "POST"})
-     * @IsGranted("ROLE_ADD_PROD", message="Tu ne peut pas acces a cet ressource")
+     * @Route("/", name="client_new", methods={"GET", "POST"})
      */
     public function new(Request $request, ClientRepository $clientRepository): Response
     {
@@ -41,17 +40,18 @@ class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $clientRepository->add($client, true);
             $this->addFlash('success', 'Le client a été ajouté avec succès!');
-            return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('client_new', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('client/new.html.twig', [
+        return $this->renderForm('client/site.html.twig', [
             'client' => $client,
             'form' => $form,
         ]);
     }
 
     /**
-     * @Route("/{id}", name="client_show", methods={"GET"})
+     * @Route("/client/{id}", name="client_show", methods={"GET"})
+     * @IsGranted("ROLE_USER", message="Tu ne peut pas acces a cet ressource")
      */
     public function show(Client $client): Response
     {
@@ -61,8 +61,8 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="client_edit", methods={"GET", "POST"})
-     * @IsGranted("ROLE_EDIT_PROS", message="Tu ne peut pas acces a cet ressource")
+     * @Route("/client/{id}/edit", name="client_edit", methods={"GET", "POST"})
+     * @IsGranted("ROLE_USER", message="Tu ne peut pas acces a cet ressource")
      */
     public function edit(Request $request, Client $client, ClientRepository $clientRepository): Response
     {
@@ -82,8 +82,8 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="client_delete", methods={"POST"})
-     * @IsGranted("ROLE_COMER", message="Tu ne peut pas acces a cet ressource")
+     * @Route("/client/{id}", name="client_delete", methods={"POST"})
+     * @IsGranted("ROLE_USER", message="Tu ne peut pas acces a cet ressource")
      */
     public function delete(Request $request, Client $client, ClientRepository $clientRepository): Response
     {

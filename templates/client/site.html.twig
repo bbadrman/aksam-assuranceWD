@@ -1,0 +1,328 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap Min CSS -->
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
+<!-- FontAwesome Min CSS -->
+{# <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}"> #}
+<!-- FlatIcon CSS -->
+ 
+<link rel="stylesheet" href="{{ asset('fonts/css/font-awesome.css') }}">
+			
+<!-- Nice Select Min CSS -->
+{# <link rel="stylesheet" href="{{ asset('css/nice-select.min.css') }}"> #}
+<!-- Style CSS -->
+<link rel="stylesheet" href="{{ asset('css/stylesite.css') }}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="{{ asset('css/responsive.css') }}"> 
+<title>Devis assurance VTC en ligne</title>
+<meta name="description" content="Assurance VTC est un contrat d’assurance souscrit par tout professionnel">
+<link rel="icon" type="image/png" href="{{ asset('images/faviconsite.png') }}">
+
+</head>
+
+<body>
+
+<header class="header-area">
+  <div class="top-header">
+    <div class="container">
+      <div class="row align-items-center">       
+        <div class="col-lg-1 col-md-12 d-none d-sm-block"> <img src="{{ asset('images/white-logo-ads.png') }}" alt="image" style="padding: 0 0 10px 0;"> </div>
+        <div class="col-lg-8 col-md-12">
+          <div class="top-header-right-side">
+            <h1 style="text-align: center;color: #FFF;font-size: 16px">Quelque soient vos antécédents obtenez un devis d'assurance pour votre VTC en quelques clics</h1>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+          <div class="top-header-right-side">
+            <ul>
+              <li>
+                <div class="icon" style="left:-50px;"> <i class="fa fa-phone"></i> </div>
+                <span>Conseil personnalisé</span> <a href="tel:0182834800">01 82 83 48 00</a> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="insurance-details-area ptb-100" style="padding-top: 88PX;">
+  <div class="container">
+  <div class="insurance-details-header">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-12">
+        <div class="image text-center"> <img src="{{ asset('images/assurance-VTC.jpg') }}" alt="assurance auto vtc" class="d-none d-sm-block">
+         {# <a href="tel:0182834800" class=" d-block d-sm-none">
+                    <img class="placeholder-glow" src="{{ asset('images/assurance-VTC-1.jpg') }}" alt="assurance VTC"> 
+         </a> #}
+        </div>
+      </div>
+     <div class="col-lg-6 col-md-12">
+        <div class="tab quote-list-tab" style="padding: 0px">
+          <div class="tab_content">
+            <div class="tabs_item " style="border: solid 2px #2face2;border-radius: 5px">
+           <h3 class="text-center" style="padding-bottom: 8px;border-bottom: 1px solid #3aade1;margin-bottom: 26px;font-size: 20px;">Complétez ce formulaire pour obtenir un tarif</h3>
+
+  
+                                <div class="row">
+                              
+       <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                         <input type="text" name="raison_sociale" id="raison_sociale" placeholder="Raison sociale..." required="" class="form-control"> 
+                                          
+                                        </div>
+                                    </div>
+                                       <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                         <input type="text" name="marque" id="marque"  placeholder="Marque du véhicule" required="" class="form-control"> 
+                                         
+                                        </div>
+                                    </div>
+                                    
+                <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                 <select id="dactivite" name="dactivite"  class="form-control" style="color:#999999;text-align: left;" >
+                                    <option value="" selected="">Démarrage d'activité </option>
+                                    <option value="OUI">OUI</option>
+                                    <option value="NON">NON</option>
+                                </select> 
+                                        </div>
+                                    </div>
+                                             <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                          <select id="assure" name="assure" class="form-control" style="color:#999999;text-align: left;" >
+                                    <option value="" selected="">Véhicule assuré actuellement</option>
+                                    <option value="OUI">OUI</option>
+                                    <option value="NON">NON</option>
+                                </select> 
+                                        </div>
+                                    </div>
+
+                                       <div class="col-lg-12 col-md-6">
+                                        <div class="form-group">
+                                          <select id="ancienne" name="ancienne" class="form-control" style="color:#999999;text-align: left;"  onchange="showDiv(this)">
+                                    <option value="" selected="">Assurance résilié</option>
+                                    <option value="1" >OUI</option>
+                                    <option value="0" >NON</option>
+                                </select> 
+                                        </div>
+                                    </div>
+
+
+ <div class="col-lg-12 col-md-6"  id="hidden_div" style="display:none;">
+                                        <div class="form-group">
+
+                                    <select name="motif" id="motif" class="btn form-control" style="color:#999999;text-align: left;">
+                                          <option value="" selected="">Motif resiliation</option>
+                                          <option value="Sinistre">Sinistre</option>
+                                          <option value="Non paiement">Non paiement</option>
+                                          <option value="Suspension de permis">Suspension de permis</option>
+                                          <option value="Echéance">Echéance</option>
+                                    </select>
+                               </div>
+   </div>
+
+
+       <script type="text/javascript">
+function showDiv(select){
+   if(select.value==1){
+    document.getElementById('hidden_div').style.display = "block";
+   } else{
+    document.getElementById('hidden_div').style.display = "none";
+   }
+} 
+</script>
+                    
+
+                                {{ form_start(form) }} 
+
+                                    <div class="col-lg-6 col-md-6">
+                                    
+                                        <div class="form-group">
+
+
+                                         {{ form_widget(form.firstname, {'attr': {'class': 'form-control selectchoice', 'placeholder': 'Votre Nom *'}}) }}
+			 
+                                        </div>
+                                    </div>
+                           
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                        {{ form_widget(form.lastname, {'attr': {'class': 'form-control selectchoice', 'placeholder': 'Votre Prénom *' }}) }}
+			 
+                                            
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                        {{ form_widget(form.phone,  {'attr': {'class': 'form-control selectchoice', 'placeholder': 'Votre Téléphone *'}}) }}
+			                                  
+                                            
+                                            
+                                        </div>
+                                    </div>
+    
+                                   
+
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group">
+                                            {{ form_widget(form.email, {'attr': {'class': 'form-control selectchoice', 'placeholder': 'E-mail'}}) }}
+				 
+                                        </div>
+                                    </div>
+                                    
+                                  
+                                
+    <div class="col-lg-12 col-md-6">  
+      <input  type="checkbox" value="">
+      <span style="font-size: 9px;">
+      En cliquant sur "comparer", vous acceptez de transmettre vos informations à AKSAM ASSURANCES,qui accepte de les utiliser conformément à sa politique de confidentialité dans le but de vous fournir des propositions de devis d’assurances adapté à votre recherche.
+      </span>
+    </div>
+                                            
+    <div class="col-lg-12 col-md-12">
+
+        <button type="submit" class="default-btn"> {{ button_label|default('Comparer') }}</button>
+          
+    </div>
+                                 
+                 {{ form_rest(form) }}
+                 {{ form_end(form) }}
+
+    <input type="text" name="token" value="" style="display:none;" />
+    <input type="hidden" name="MM_insertAU" value="contactForm" />
+                      
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="insurance-details-desc">
+  <div class="col-lg-12 col-md-12">
+    <div class="content" style="text-align: justify;">
+      <h3>Assurance VTC</h3>
+      <p>Assurance VTC est un contrat d’assurance souscrit par tout professionnel exerçant une activité de transport de personnes à titre onéreux tout en utilisant un véhicule à moteur dont le poids total avec charge est inférieur à 3,5 tonnes. Acronyme de l’expression véhicule de tourisme avec chauffeur, l’activité des VTC est apparue en France à partir de 2011. L’exercice de l’activité est régulé par la loi numéro 2009–888 du 22 juillet 2009 qui définit le cadre d’exercice de l’activité de chauffeur VTC par une :
+</p>
+
+
+
+   <ul class="features-list">
+            <li><i class="fas fa-check"></i>Capacité professionnelle par la détention d’une carte professionnelle de conducteur de voiture de transport avec chauffeur (carte VTC);
+</li>
+            <li><i class="fas fa-check"></i>L’exercice de l’activité VTC par une personne morale ou physique immatriculée au registre de commerce ou registre des métiers où l’activité principale exercée est l’exploitation de voiture de transport avec chauffeur code APE 6932Z (justificatif KBIS ou fiche INSEE).
+</li>
+
+
+
+    <li><i class="fas fa-check"></i>Obligation d’assurance en souscrivant une assurance responsabilité civile professionnelle VTC ainsi qu’une assurance auto pour le véhicule utilisé dans l’exercice de l’activité pour usage transport de personnes à titre onéreux.
+
+</li>
+          </ul>
+
+
+
+<h3>Devis assurance VTC en ligne
+</h3>
+
+      <p><b>Pour obtenir un devis assurance VTC en ligne il faut détenir les informations suivantes :</b>
+</p>
+
+
+        <ul class="features-list">
+          <li><i class="fas fa-check"></i> KBIS ou fiche INSEE, permet de connaître la date de création de l’entreprise, son activité principale et le gérant.
+</li>
+          <li><i class="fas fa-check"></i> Carte VTC afin de justifier la capacité professionnelle.
+</li>
+          <li><i class="fas fa-check"></i> Carte grise ou bon de commande pour connaître les caractéristiques du véhicule à assurer.
+</li>
+          <li><i class="fas fa-check"></i> Relevé d’information, afin de connaître les antécédents d’assurance du souscripteur.
+</li>
+        </ul>
+
+
+     
+      <p><b>Pour le relevé d’information, plusieurs cas de figures peuvent subsister :</b></p>
+        <ul class="features-list">
+          <li><i class="fas fa-check"></i> Souscripteur sans antécédents d’assurance VTC, si c’est une nouvelle création d’activité, la tarification se fait sur la base des antécédents d’assurances privés et/ou professionnels du souscripteur ou d’un coefficient bonus-malus de 1 si ce dernier ne peut pas en justifier. 
+</li>
+         
+  
+          <li><i class="fas fa-check"></i> Tout conducteur si la société en exercice depuis sa création n’a jamais souscrit d’assurance VTC ou si le souscripteur ne peut justifier d’antécédents à titre privé ou professionnel .
+</li>
+         
+        </ul>
+     
+    </div>
+    <h3>Assurance transport de personne à titre onéreux</h3>
+    <p>
+<b>Les justificatifs d’une assurance de transport de personnes à titre onéreux sont :</b></p>
+   
+     
+        <ul class="features-list">
+          <li><i class="fas fa-check"></i> Attestation responsabilité civile professionnelle VTC;
+</li>
+          <li><i class="fas fa-check"></i> Attestation d’assurance avec la mention usage transport de personnes à titre onéreux;</li>
+          <li><i class="fas fa-check"></i> Carte verte.
+</li>
+         
+        </ul>
+    
+      <p>Compléter le formulaire en haut de la page afin d’obtenir votre devis d’assurance flotte automobile ou assurance flotte poids lourd et cela quels que soient vos antécédents d’assurances et l’etat de votre parc de véhicules.</p>
+   
+  </div>
+</section>
+<footer class="footer-area" style="padding-top: 0px;">
+  <div class="container">
+  <div class="copyright-area">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-sm-6 col-md-6">
+     <p><i class="far fa-copyright"></i> 2023 Tous droits réservés | <a title="AKSAM" href="/mentions-legales.php">Mentions légales</a>  </p>
+      </div>
+      <div class="col-lg-6 col-sm-6 col-md-6">
+        <ul>
+          <li>Entreprise soumise au contrôle de l'ACPR</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="go-top"><i class="fas fa-chevron-up"></i><i class="fas fa-chevron-up"></i></div>
+<!-- jQuery Min JS --> 
+ 
+<script src="{{ asset('js/jquery.min.js') }}"></script> 
+<!-- Popper Min JS --> 
+<!-- Bootstrap Min JS --> 
+<script src="{{ asset('js/bootstrap.min.js') }}"></script> 
+<!-- Parallax Min JS --> 
+{# <script src="{{ asset('js/parallax.min.js') }}"></script>  #}
+<!-- Owl Carousel Min JS --> 
+
+<!-- Nice Select Min JS --> 
+{# <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>  #}
+<!-- Magnific Popup Min JS --> 
+
+<!-- WOW Min JS --> 
+{# <script src="{{ asset('js/wow.min.js') }}"></script>  #}
+
+{# <script src="{{ asset('js/parsley.js') }}"></script>  #}
+{# <script src="{{ asset('js/messages.js') }}"></script> #}
+{# <script src="{{ asset('js/jquery.maskedinput.min.js') }}"></script> #}
+<!-- Main JS --> 
+{# <script src="{{ asset('js/main.js') }}"</script> #}
+</body>
+</html>

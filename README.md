@@ -494,7 +494,7 @@ le probleme c que on a affecter cet methoud sur controller du dashbord afin d'af
  ## Deployment :
 
  il metre cet script afin maitre ajour la base données sur 'compser.json' :
-                 "scripts": {
+    "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
