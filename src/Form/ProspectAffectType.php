@@ -49,6 +49,7 @@ class ProspectAffectType extends AbstractType
             $form->add('comrcl', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'username',
+                'required' => false,
                 // 'disabled' => $team === null,
                 'placeholder' => '--Choose a Comercial--',
                 'choices' => $comrcl

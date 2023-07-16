@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ProspectRepository;
+
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProspectRepository;
 
 /**
  * @ORM\Entity(repositoryClass=ProspectRepository::class)
@@ -20,11 +22,23 @@ class Prospect
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min=2,
+     *      max=10,
+     *      minMessage="Votre prénom doit contenir au moins deux caractères",
+     *      maxMessage="Votre prénom doit contenir au maximum dix caractères"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min=2,
+     *     max=10,
+     *     minMessage="Votre nom doit contenir au moins deux caractères",
+     *     maxMessage="Votre nom doit contenir au maximum dix caractères"
+     * )
      */
     private $lastname;
 
@@ -34,7 +48,7 @@ class Prospect
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", nullable=true, length=255) 
      */
     private $email;
 
@@ -44,7 +58,7 @@ class Prospect
     private $gender;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", nullable=true, length=255)
      */
     private $city;
 
@@ -54,13 +68,13 @@ class Prospect
     private $adress;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $brithAt;
 
      
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", nullable=true, length=50)
      */
     private $source;
 

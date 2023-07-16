@@ -28,7 +28,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/", name="client_new", methods={"GET", "POST"})
+     * @Route("/client/new", name="client_new", methods={"GET", "POST"})
      */
     public function new(Request $request, ClientRepository $clientRepository): Response
     {
