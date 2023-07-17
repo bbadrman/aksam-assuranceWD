@@ -27,7 +27,7 @@ class DashboardController extends AbstractController
         $this->entityManager = $entityManager;
     }
     /**
-     * @Route("/home", name="dashboard")
+     * @Route("/", name="dashboard")
      * @IsGranted("ROLE_USER", message="Tu ne peut pas acces a cet ressource")
      
      * @return Response  
