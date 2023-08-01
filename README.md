@@ -510,3 +510,9 @@ le probleme c que on a affecter cet methoud sur controller du dashbord afin d'af
             "@auto-scripts"
         ]
     },
+  ## Error en prod :
+      -First Error: A 500 Internal Server Error is a generic error message that indicates something went wrong on the server. It doesn't provide much information about the specific problem, but there are a few things you can do to try to fix it.
+      - Fix : i fixet the error message par migration instante ete modifi en entitie (champ null)
+
+     -second Error : javascript dont working  on click on button 
+     -Fix :  i fixeted par included comont.min.js
