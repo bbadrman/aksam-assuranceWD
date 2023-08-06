@@ -5,11 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface; 
 
 class RegisterController extends AbstractController
 {
@@ -23,7 +23,7 @@ class RegisterController extends AbstractController
     /**
      * @Route("/inscription/aksam", name="register")
      */
-    public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function index(Request $request, UserPasswordHasherInterface $encoder): Response
     {
         $success_message = null;
 
@@ -37,7 +37,7 @@ class RegisterController extends AbstractController
 
             
             
-            $password = $encoder->encodePassword($user, $user->getPassword());
+            $password = $encoder->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
 
             $this->entityManager->persist($user);
